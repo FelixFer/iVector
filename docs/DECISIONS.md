@@ -1,0 +1,48 @@
+# Architecture and Design Decisions
+
+Record accepted decisions here. Add new entries with a date, context, decision, and consequences. Proposed decisions should be labelled as proposed until approved.
+
+## D-001 — Seven-Page Information Architecture
+
+- **Status:** Accepted baseline
+- **Decision:** The website has Home, About, Research, Projects, People, Publications, and Virtual Lab.
+- **Context:** The current website concept requires a focused academic structure.
+- **Consequences:** News & Events is excluded from navigation and page scope.
+
+## D-002 — Visual Direction
+
+- **Status:** Accepted baseline
+- **Decision:** Use a minimalist academic design with subtle pixel-art influence, approximately 70% and 30% respectively as qualitative guidance.
+- **Consequences:** Standard pages prioritize readability; the Virtual Lab can be more playful.
+
+## D-003 — Typography
+
+- **Status:** Accepted baseline
+- **Decision:** Use self-hosted Pixelify Sans Bold for page and section titles. Use Plus Jakarta Sans for body copy, navigation, controls, metadata, and publication titles.
+- **Consequences:** Do not introduce additional font families without a clear reason and approval.
+
+## D-004 — Color Palette
+
+- **Status:** Accepted baseline
+- **Decision:** Use Warm Ivory, Powder Blue, Sage Green, Soft Lavender, Peach, Warm Beige, Soft Charcoal, and Muted Gray as defined in `DESIGN_SYSTEM.md`.
+- **Consequences:** Avoid unrelated colors and dark neon visual styles.
+
+## D-005 — Virtual Lab Interaction Model
+
+- **Status:** Accepted baseline
+- **Decision (updated 2026-11-13):** The Virtual Lab is one playable top-down 2D scene with a visitor character and four fictional room guides. Keyboard and touch movement are optional; direct links remain available without JavaScript. Guides offer navigation-only dialogue and never impersonate real lab members. The project owner approved the artwork.
+- **Consequences:** No separate room pages, RPG systems, scores, quests, or character progression in the initial release.
+
+## D-006 — Academic Content Accuracy
+
+- **Status:** Accepted baseline
+- **Decision:** Never invent research, project, publication, member, or institutional information.
+- **Consequences:** Missing content must remain an editable placeholder during development or be omitted from public output.
+
+## D-007 — Static Next.js Preview
+
+- **Status:** Accepted
+- **Date:** 2026-11-09
+- **Context:** The first milestone is a locally reviewable English-language site with a portable build.
+- **Decision:** Use Next.js App Router, strict TypeScript, npm, CSS Modules, and static export.
+- **Consequences:** Site content ships with each build. The production host and domain are selected after content sign-off.

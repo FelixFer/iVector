@@ -1,0 +1,48 @@
+.page {
+  padding-block: clamp(2.75rem, 7.2vw, 6rem) clamp(4rem, 9vw, 8rem);
+}
+
+.page > h1 { margin-bottom: 1.65rem; }
+.page > section + section { margin-top: 2.8rem; }
+.page section h2 { margin-bottom: 0.9rem; }
+.page section > p { max-width: 70ch; }
+.page section > p + p { margin-top: 0.65rem; }
+
+.rows {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border);
+}
+
+.rows > li { padding-block: 1.2rem; border-bottom: 1px solid var(--color-border); }
+.rows h2, .rows h3 { margin-bottom: 0.45rem; }
+.rows p { max-width: 70ch; margin-top: 0.25rem; color: var(--color-muted); }
+.meta { color: var(--color-muted); font: 0.75rem / 1.6 var(--font-sans); }
+
+.rowHeading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.15rem 1rem;
+}
+
+.resources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1rem;
+  padding: 0;
+  margin: 0.2rem 0 0;
+  list-style: none;
+}
+
+.resources a { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.875rem; font-weight: 700; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 1.4rem; }
+
+.publicationTitle { font-family: var(--font-sans); }
+.person { display: flex; gap: 1.25rem; align-items: start; }
+.person > div:last-child { min-width: 0; }
+.portrait { display: grid; place-items: center; flex: none; width: clamp(64px, 18vw, 96px); aspect-ratio: 1; background: var(--color-blue); color: var(--color-link); font: 700 1.5rem var(--font-display); overflow: hidden; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; }
+.email { display: inline-flex; align-items: center; min-height: 44px; overflow-wrap: anywhere; max-width: 100%; font-size: 0.875rem; }

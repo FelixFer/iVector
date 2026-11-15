@@ -1,0 +1,47 @@
+.header { border-bottom: 1px solid var(--color-border); }
+.headerInner { display: flex; align-items: center; justify-content: space-between; gap: 0.65rem; min-height: 4.125rem; }
+.headerInner > a:last-child { font-size: 0.8rem; text-align: center; }
+.main { max-width: 67rem; padding-block: clamp(2.2rem, 5vw, 4rem) 3rem; }
+.heading { margin-bottom: 1.35rem; }
+.instructions { margin-bottom: 0.75rem; font-size: 0.875rem; color: var(--color-muted); }
+.scene { position: relative; container-type: inline-size; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); }
+.scene img { display: block; width: 100%; border-radius: var(--radius); pointer-events: none; }
+.roomSign { position: absolute; transform: translateX(-50%); padding-inline: 3px; background: var(--destination); color: var(--color-text); font: 600 0.75rem / 1 var(--font-sans); white-space: nowrap; pointer-events: none; }
+.roomSign[data-room="Publications"] { transform: translateX(-100%); }
+.talkPrompt { position: absolute; z-index: 3; max-width: 7.5rem; padding: 0.25rem 0.4rem; background: var(--color-text); color: var(--color-paper); font: 600 0.75rem / 1.4 var(--font-sans); pointer-events: none; }
+.touchPrompt { display: none; }
+@media (pointer: coarse) { .touchPrompt { display: inline; } .keyboardPrompt { display: none; } }
+.sprite { display: block; width: clamp(14px, 3.333cqw, 32px); height: auto; }
+.player, .guide { position: absolute; transform: translate(-50%, -100%); }
+.player { pointer-events: none; color: #1267a5; z-index: 2; }
+.guide { display: flex; align-items: end; justify-content: center; min-width: 44px; min-height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.guide:disabled { cursor: not-allowed; }
+.guide:not(:disabled):hover .sprite, .guide:focus-visible .sprite { filter: drop-shadow(0 1px 0 var(--color-paper)); }
+.guide:focus-visible { outline-offset: 1px; }
+.player[data-walking="true"] .legs { animation: walk 180ms steps(2, end) infinite alternate; }
+@keyframes walk { to { transform: translateY(-1px); } }
+@media (prefers-reduced-motion: reduce) { .player[data-walking="true"] .legs { animation: none; } }
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; padding-block: 1rem; }
+.directions { display: grid; grid-template: repeat(2, 44px) / repeat(3, 44px); gap: 4px; }
+.directions button { min-width: 44px; padding: 0; touch-action: none; font: 700 1.3rem var(--font-sans); cursor: pointer; }
+.directions button:active { background: var(--color-blue); }
+.up { grid-area: 1 / 2; }
+.left { grid-area: 2 / 1; }
+.down { grid-area: 2 / 2; }
+.right { grid-area: 2 / 3; }
+.location { flex: 1 1 15rem; }
+.location > p:first-child { font-weight: 700; }
+.location button { margin-top: 0.6rem; cursor: pointer; }
+.hint { font-size: 0.875rem; color: var(--color-muted); }
+.research { --destination: var(--color-blue); }
+.projects { --destination: var(--color-green); }
+.people { --destination: var(--color-peach); }
+.publications { --destination: var(--color-lavender); }
+.destinations { display: grid; gap: 0.5rem; margin-top: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); }
+.destinations a { display: flex; align-items: center; min-height: 44px; padding: 0.45rem 0.75rem; border: 1px solid var(--color-border); background: var(--destination); color: var(--color-text); font-weight: 700; }
+.destinations a:hover { border-color: var(--color-link); }
+.dialog { width: min(30rem, calc(100% - 2rem)); max-height: calc(100% - 2rem); padding: clamp(1rem, 4vw, 2rem); border: 2px solid var(--color-text); background: var(--color-paper); color: var(--color-text); }
+.dialog::backdrop { background: rgb(52 58 64 / 40%); }
+.dialog p { margin-top: 0.75rem; }
+.dialogActions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+.dialog button { font-family: var(--font-sans); cursor: pointer; }

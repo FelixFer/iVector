@@ -1,0 +1,47 @@
+name: Private review build
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: review-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npx playwright install --with-deps chromium
+      - name: Build published content
+        run: npm run build
+        env:
+          CONTENTFUL_SPACE_ID: ${{ github.event_name != 'pull_request' && secrets.CONTENTFUL_SPACE_ID || '' }}
+          CONTENTFUL_ENVIRONMENT: ${{ github.event_name != 'pull_request' && secrets.CONTENTFUL_ENVIRONMENT || '' }}
+          CONTENTFUL_DELIVERY_TOKEN: ${{ github.event_name != 'pull_request' && secrets.CONTENTFUL_DELIVERY_TOKEN || '' }}
+      - run: npm test
+        env:
+          PLAYWRIGHT_BROWSER_CHANNEL: chromium
+      - uses: actions/upload-artifact@v4
+        with:
+          name: static-review-${{ github.sha }}
+          path: out/
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-evidence-${{ github.run_id }}
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 7

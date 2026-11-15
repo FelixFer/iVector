@@ -1,0 +1,72 @@
+.hero {
+  display: grid;
+  align-items: center;
+  gap: clamp(1.75rem, 5.25vw, 5.25rem);
+  padding-block: clamp(2.75rem, 7.4vw, 6.25rem);
+}
+
+.hero h1 { font-size: clamp(2.65rem, 6.2vw, 4rem); }
+.heroCopy { min-width: 0; }
+
+.intro {
+  max-width: 39ch;
+  margin-top: 1.2rem;
+  color: var(--color-muted);
+  font-size: clamp(1rem, 1.7vw, 1.2rem);
+}
+
+.location { margin-top: 0.35rem; color: var(--color-muted); font: 0.8rem / 1.7 var(--font-sans); }
+.actions { display: flex; flex-wrap: wrap; gap: 0.65rem; margin: 1.65rem 0 1rem; }
+.enterLab { gap: 0.45rem; }
+
+.illustration {
+  min-width: 0;
+  margin: 0;
+  padding: clamp(0.5rem, 1.25vw, 1rem);
+  background: var(--color-text);
+  clip-path: polygon(8px 0, calc(100% - 8px) 0, calc(100% - 8px) 4px, 100% 4px, 100% calc(100% - 4px), calc(100% - 8px) calc(100% - 4px), calc(100% - 8px) 100%, 8px 100%, 8px calc(100% - 4px), 0 calc(100% - 4px), 0 4px, 8px 4px);
+}
+
+.illustration img { display: block; width: 100%; }
+.section { padding-block: 2.5rem; }
+.section > p { max-width: 66ch; margin: 1rem 0; }
+.previews { padding: 0; list-style: none; }
+.previews li { padding-block: 0.9rem; border-bottom: 1px solid var(--color-border); }
+.previews p { max-width: 66ch; margin-top: 0.3rem; color: var(--color-muted); }
+
+.explore {
+  padding-block: clamp(2rem, 4.8vw, 3.6rem);
+  border-top: 1px solid var(--color-border);
+}
+
+.directory {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 0 2.5rem;
+  padding: 0;
+  margin: 1.25rem 0 0;
+  list-style: none;
+}
+
+.directory a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 52px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.directory a:hover { color: var(--color-link); text-decoration: underline; }
+.directory svg { flex: none; color: var(--color-link); }
+
+@media (min-width: 48rem) {
+  .hero { grid-template-columns: 1.15fr 1fr; }
+}
+
+@media (min-width: 56rem) {
+  .directory { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
