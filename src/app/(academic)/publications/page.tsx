@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default async function PublicationsPage() {
   const { publications } = await loadContent();
   return (
-    <AcademicPage title="Publications">
+    <AcademicPage accent="Publications" title="Publications">
       {publications.length ? (
         <ul className={styles.rows}>
           {publications.toSorted((first, second) => second.year - first.year)

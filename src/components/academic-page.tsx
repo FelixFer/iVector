@@ -1,11 +1,12 @@
+import { PageAccent, type Accent } from "./page-accent";
 import type { ReactNode } from "react";
 import type { Resource } from "@/data/content";
 import styles from "./academic-page.module.css";
 
-export function AcademicPage({ title, children }: { title: string; children: ReactNode }) {
+export function AcademicPage({ title, accent, children }: { title: string; accent?: Accent; children: ReactNode }) {
   return (
     <div className={`container ${styles.page}`}>
-      <h1>{title}</h1>
+      <header className={styles.heading}><h1>{title}</h1>{accent && <PageAccent kind={accent} />}</header>
       {children}
     </div>
   );

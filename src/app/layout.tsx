@@ -1,3 +1,4 @@
+import { MotionProvider } from "@/components/motion";
 import type { Metadata } from "next";
 import "@fontsource/pixelify-sans/700.css";
 import "@fontsource-variable/plus-jakarta-sans";
@@ -16,7 +17,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body>
         <a className="skip-link" href="#main">Skip to content</a>
-        {children}
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

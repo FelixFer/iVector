@@ -28,3 +28,15 @@ Significant project changes are recorded here. Keep entries concise and date the
 
 - Added approved member records with portrait fallbacks, a published-content CMS adapter, draft seed/model setup, private review workflow, and activation/recovery documentation. External account activation remains pending.
 
+
+- Added P1 cozy motion controls, Home cloud ambience, monitor and guide feedback, collision-aware walking animation, doorway guidance and session position restoration.
+
+
+### P1 page liveliness extension
+
+- Added five small decorative academic heading illustrations with shared motion preferences.
+- Added Copy email with success/failure status and member portrait focus feedback.
+- Added Home door gesture, earlier cloud visibility, and Virtual Lab current-room outline.
+- Kept academic records, typography, empty states, and CMS models unchanged.
+
+- Removed manual animation buttons and their stored preference. System reduced motion and offscreen/hidden suspension remain active.

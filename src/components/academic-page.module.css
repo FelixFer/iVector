@@ -46,3 +46,11 @@
 .portrait { display: grid; place-items: center; flex: none; width: clamp(64px, 18vw, 96px); aspect-ratio: 1; background: var(--color-blue); color: var(--color-link); font: 700 1.5rem var(--font-display); overflow: hidden; }
 .portrait img { width: 100%; height: 100%; object-fit: cover; }
 .email { display: inline-flex; align-items: center; min-height: 44px; overflow-wrap: anywhere; max-width: 100%; font-size: 0.875rem; }
+
+.heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.65rem; }
+.heading h1 { min-width: 0; }
+.person:hover .portrait, .person:focus-within .portrait { outline: 2px solid var(--color-link); outline-offset: 3px; }
+.resources a:hover, .resources a:focus-visible { text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.arrow { display: inline-block; margin-left: .5rem; }
+html[data-motion-paused="false"] .actions a:hover .arrow, html[data-motion-paused="false"] .actions a:focus-visible .arrow { transform: translateX(1px); }
+@media (max-width: 479px) { .heading { align-items: start; flex-direction: column; gap: .75rem; } }

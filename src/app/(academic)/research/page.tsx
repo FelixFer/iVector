@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default async function ResearchPage() {
   const { researchAreas } = await loadContent();
   return (
-    <AcademicPage title="Research">
+    <AcademicPage accent="Research" title="Research">
       {researchAreas.length ? (
         <ul className={styles.rows}>
           {researchAreas.map(({ id, title, description, category }) => (

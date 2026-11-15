@@ -2,6 +2,8 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
 import { canStand, guideNear, guides, hasLineOfSight, move, movementSpeed, obstacles, roomAt, spawn, type Point } from "../src/app/virtual-lab/scene-data";
 
+test.beforeEach(async ({ page }) => { await page.addInitScript(() => sessionStorage.removeItem("ivector-position-v1")); });
+
 const routes: Point[][] = [
   [{ x: 120, y: 52 }, { x: 69, y: 52 }],
   [{ x: 120, y: 56 }, { x: 170, y: 56 }],
@@ -219,6 +221,7 @@ test("movement stops on release, focus loss, visibility change and pointer cance
 test("mobile guides, touch hold and reduced motion work", async ({ browser, baseURL }, testInfo) => {
   const context = await browser.newContext({ baseURL, viewport: { width: 320, height: 900 }, hasTouch: true, isMobile: true, reducedMotion: "reduce" });
   try {
+    await context.addInitScript(() => sessionStorage.removeItem("ivector-position-v1"));
     const page = await context.newPage();
     await page.clock.install();
     await page.goto("/virtual-lab/");

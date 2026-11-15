@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import { useSceneMotion } from "@/components/motion";
 import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import { guideNear, guides, hasLineOfSight, move, roomAt, spawn, vectors, type Direction, type Guide } from "./scene-data";
+import { canStand, guideNear, guides, hasLineOfSight, move, roomAt, spawn, vectors, type Direction, type Guide } from "./scene-data";
 import styles from "./virtual-lab.module.css";
 
 const keys: Record<string, Direction> = {
@@ -30,10 +31,34 @@ export default function Playable() {
   const [guide, setGuide] = useState<Guide | null>(null);
   const held = useRef(new Map<string, Direction>());
   const dialog = useRef<HTMLDialogElement>(null);
-  const scene = useRef<HTMLDivElement>(null);
+  const { ref: scene, active, visible, foreground } = useSceneMotion();
+  const currentPosition = useRef(spawn);
+  const currentFacing = useRef<Direction>("down");
+  const activity = useRef({ visible: true, foreground: true });
+  useEffect(() => { activity.current = { visible, foreground }; }, [visible, foreground]);
   const origin = useRef<HTMLElement | null>(null);
   const nearby = guideNear(position);
   const room = roomAt(position);
+  const blocked = !nearby && guides.find(g => Math.hypot(g.x-position.x, g.y-position.y) <= 12 && !hasLineOfSight(position, g));
+  const [wake, setWake] = useState<string | null>(null);
+  const lastRoom = useRef(room);
+  useEffect(() => {
+    if (lastRoom.current === room) return;
+    lastRoom.current = room;
+    if (!active || !["Research", "Projects"].includes(room)) return;
+    const frame = requestAnimationFrame(() => setWake(room));
+    const timer = setTimeout(() => setWake(null), 400);
+    return () => { cancelAnimationFrame(frame); clearTimeout(timer); setWake(null); };
+  }, [room, active]);
+  const [greeted, setGreeted] = useState(new Set<string>());
+  const greeting = nearby && !greeted.has(nearby.href) ? nearby.href : null;
+  useEffect(() => () => { if (nearby) setGreeted(previous => new Set(previous).add(nearby.href)); }, [nearby]);
+  useEffect(() => {
+    if (active || !nearby) return;
+    const frame = requestAnimationFrame(() => setGreeted(previous => new Set(previous).add(nearby.href)));
+    return () => cancelAnimationFrame(frame);
+  }, [active, nearby]);
+  function entrance() { stop(); currentPosition.current = spawn; currentFacing.current = "down"; setPosition(spawn); setFacing("down"); try { sessionStorage.removeItem("ivector-position-v1"); } catch {} scene.current?.focus({ preventScroll: true }); }
 
   function stop() { held.current.clear(); setWalking(false); }
   function talk(selected: Guide, control: HTMLElement) {
@@ -52,22 +77,33 @@ export default function Playable() {
     if (ready && (document.activeElement === document.body || document.activeElement?.id === "main")) {
       scene.current?.focus({ preventScroll: true });
     }
-  }, [ready]);
+  }, [ready, scene]);
   useEffect(() => {
     let frame = 0, last = 0;
     const inputs = held.current;
+    try {
+      const saved = JSON.parse(sessionStorage.getItem("ivector-position-v1") || "null");
+      if (saved?.version === 1 && Number.isFinite(saved.x) && Number.isFinite(saved.y) && canStand(saved) && ["up", "down", "left", "right"].includes(saved.facing)) { currentPosition.current = { x: saved.x, y: saved.y }; currentFacing.current = saved.facing; }
+    } catch {}
+    const save = () => { try { sessionStorage.setItem("ivector-position-v1", JSON.stringify({ version: 1, ...currentPosition.current, facing: currentFacing.current })); } catch {} };
+    window.addEventListener("pagehide", save);
     const cancel = () => { held.current.clear(); setWalking(false); };
     const tick = (time: number) => {
-      if (!last) setReady(true);
+      if (!last) { setPosition(currentPosition.current); setFacing(currentFacing.current); setReady(true); }
       const seconds = last ? (time - last) / 1000 : 0;
       last = time;
       let x = 0, y = 0;
       held.current.forEach(direction => { x += vectors[direction].x; y += vectors[direction].y; });
-      const moving = (x !== 0 || y !== 0) && !dialog.current?.open;
-      setWalking(moving);
+      if (!activity.current.visible || !activity.current.foreground) held.current.clear();
+      const moving = (x !== 0 || y !== 0) && !dialog.current?.open && activity.current.visible && activity.current.foreground;
+      if (!moving) setWalking(false);
       if (moving) {
-        setFacing(x ? x > 0 ? "right" : "left" : y > 0 ? "down" : "up");
-        setPosition(current => move(current, { x, y }, seconds));
+        currentFacing.current = x ? x > 0 ? "right" : "left" : y > 0 ? "down" : "up";
+        setFacing(currentFacing.current);
+        const before = currentPosition.current;
+        const next = move(before, { x, y }, seconds);
+        setWalking(next.x !== before.x || next.y !== before.y);
+        currentPosition.current = next; setPosition(next);
       }
       frame = requestAnimationFrame(tick);
     };
@@ -76,7 +112,7 @@ export default function Playable() {
     window.addEventListener("keyup", release); window.addEventListener("blur", cancel);
     document.addEventListener("visibilitychange", cancel);
     return () => {
-      cancelAnimationFrame(frame); inputs.clear();
+      cancelAnimationFrame(frame); inputs.clear(); save(); window.removeEventListener("pagehide", save);
       window.removeEventListener("keyup", release); window.removeEventListener("blur", cancel);
       document.removeEventListener("visibilitychange", cancel);
     };
@@ -86,7 +122,7 @@ export default function Playable() {
       <span className={styles.keyboardPrompt}>Arrow keys / WASD to move. E or click a guide to talk.</span>
       <span className={styles.touchPrompt}>Use the direction buttons to move. Tap a guide to talk.</span>
     </p>
-    <div ref={scene} className={styles.scene} role="group" tabIndex={ready ? 0 : undefined}
+    <div ref={scene} className={styles.scene} data-motion-active={active} role="group" tabIndex={ready ? 0 : undefined}
       aria-label="Walk around the lab" aria-describedby="walk-instructions"
       onBlur={stop} onPointerDown={event => { if (event.target === event.currentTarget) scene.current?.focus(); }}
       onKeyDown={event => {
@@ -96,6 +132,8 @@ export default function Playable() {
         if (key === "e" && nearby && !event.repeat) { event.preventDefault(); talk(nearby, event.currentTarget); }
       }}>
       <Image src="/art/lab-map.svg" alt="" width={960} height={560} unoptimized preload />
+      {ready && active && wake === room && <svg key={room} className={styles.monitorWake} viewBox="0 0 240 140" aria-hidden="true"><path fill="#fff7e9" d={room === "Research" ? "M36 26.8h11v4.8H36z" : "M150 27.6h11v4.8h-11zM186 27.6h11v4.8h-11z"} /></svg>}
+      {room !== "Central corridor" && <svg key={room} className={styles.roomOutline} data-animate={active} viewBox="0 0 240 140" aria-hidden="true"><rect x={room === "Research" || room === "People" ? 13 : 137} y={room === "Research" || room === "Projects" ? 10 : 82} width="90" height={room === "Research" || room === "Projects" ? 47 : 42} /></svg>}
       {guides.map(g => <span key={g.href} className={`${styles.roomSign} ${styles[g.label.toLowerCase()]}`} data-room={g.label}
         style={{ left: `${g.sign.x / 2.4}%`, top: `${g.sign.y / 1.4}%` }}>{g.label}</span>)}
       {ready && <>
@@ -108,7 +146,7 @@ export default function Playable() {
         {guides.map(g => <button type="button" key={g.href} className={styles.guide} aria-label={`Talk to ${g.label} Guide`}
           disabled={!hasLineOfSight(position, g)} title={hasLineOfSight(position, g) ? `${g.label} Guide` : `Walk through the doorway to talk to ${g.label} Guide`}
           style={{ left: `${g.x / 2.4}%`, top: `${g.y / 1.4}%`, color: g.color }}
-          onClick={event => talk(g, event.currentTarget)}><Sprite /></button>)}
+          onClick={event => talk(g, event.currentTarget)} data-greeting={greeting === g.href} onAnimationEnd={() => setGreeted(previous => new Set(previous).add(g.href))}><Sprite facing={nearby === g ? Math.abs(position.x-g.x) > Math.abs(position.y-g.y) ? position.x > g.x ? "right" : "left" : position.y > g.y ? "down" : "up" : "down"} /></button>)}
       </>}
     </div>
     {ready && <div className={styles.controls}>
@@ -121,15 +159,17 @@ export default function Playable() {
           }}
           onPointerUp={event => held.current.delete(`pointer:${event.pointerId}`)}
           onPointerCancel={stop} onLostPointerCapture={stop}
-          onClick={event => { if (event.detail === 0) { setFacing(direction); setPosition(current => move(current, vectors[direction], 0.05)); } }}>
+          onClick={event => { if (event.detail === 0) { setFacing(direction); const next = move(currentPosition.current, vectors[direction], 0.05); currentPosition.current = next; currentFacing.current = direction; setPosition(next); } }}>
           <span aria-hidden="true">{arrows[direction]}</span>
         </button>)}
       </div>
       <div className={styles.location}>
         <p role="status">{room}</p>
         <p className={styles.hint}>You are the blue character.</p>
+        <p aria-live="polite" className={styles.hint}>{blocked ? `Use the doorway to reach ${blocked.label} Guide.` : ""}</p>
         {nearby && <button type="button" className="button" onClick={event => talk(nearby, event.currentTarget)}>Talk to {nearby.label} Guide</button>}
       </div>
+      <button type="button" className="button button-secondary" onClick={entrance}>Return to entrance</button>
     </div>}
     <noscript><p>Use the links below to explore the lab.</p></noscript>
     <dialog ref={dialog} className={styles.dialog} aria-labelledby="guide-title" aria-describedby="guide-dialogue"

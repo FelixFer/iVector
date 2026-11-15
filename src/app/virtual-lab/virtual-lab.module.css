@@ -45,3 +45,17 @@
 .dialog p { margin-top: 0.75rem; }
 .dialogActions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
 .dialog button { font-family: var(--font-sans); cursor: pointer; }
+
+.monitorWake { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; animation: wake 400ms ease-out both; }
+@keyframes wake { from { opacity: 0.7; } to { opacity: 0; } }
+.scene[data-motion-active="true"] .guide[data-greeting="true"] .sprite { animation: greet 400ms steps(2, end) both; }
+@keyframes greet { 50% { transform: translateY(-1px); } }
+.scene:not([data-motion-active="true"]) .legs { animation: none; }
+html:not([data-motion-paused="false"]) .legs { animation: none; }
+@media (prefers-reduced-motion: reduce) { .monitorWake, .guide .sprite { animation: none !important; } }
+
+.roomOutline { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.roomOutline rect { fill: none; stroke: var(--color-link); stroke-width: .5px; opacity: .55; }
+.roomOutline[data-animate="true"] { transition: opacity 220ms ease-out; }
+@starting-style { .roomOutline[data-animate="true"] { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .roomOutline { transition: none !important; } }

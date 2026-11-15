@@ -108,3 +108,13 @@ a:hover { color: var(--color-link-hover); }
 .button-secondary { background: var(--color-paper); border-color: var(--color-border); color: var(--color-link); }
 .button-secondary:hover { background: var(--color-surface); border-color: var(--color-link); color: var(--color-link-hover); }
 
+
+.button, nav a, summary { transition: background-color 140ms, border-color 140ms, color 140ms; }
+.workspace-ambience { position: absolute; inset: clamp(0.5rem, 1.25vw, 1rem); pointer-events: none; }
+.workspace-ambience svg { display: block; width: 100%; height: 100%; }
+.pixel-cloud { animation: cloud-drift 16s steps(40, end) -4s infinite; animation-play-state: paused; }
+.workspace-ambience[data-active="true"] .pixel-cloud { animation-play-state: running; }
+@keyframes cloud-drift { to { transform: translateX(40px); } }
+html:not([data-motion-paused="false"]) .pixel-cloud { animation-play-state: paused; }
+html:not([data-motion-paused="false"]) .button, html:not([data-motion-paused="false"]) nav a { transition-duration: 0s; }
+@media (prefers-reduced-motion: reduce) { .pixel-cloud { animation: none; } .button, nav a, summary { transition-duration: 0s; } }

@@ -52,3 +52,14 @@ Potential enhancements after the initial release:
 ## Priority Guidance
 
 Prioritize correctness, responsive behavior, content integrity, and core navigation before decorative effects or advanced interactions.
+
+## P1 cozy interaction pass
+
+- Automatic system reduced-motion preference, Home cloud, control transitions and monitor/guide feedback.
+- Collision-aware walking feedback and visible blocked-guide guidance.
+- Validated same-tab position restore and Return to entrance.
+- Content-backed room objects remain deferred until verified directory records exist.
+
+### P1 extension implemented locally
+
+Five decorative heading accents, Home cloud phase and door gesture, member portrait focus/copy-email feedback, resource link feedback, and Virtual Lab current-room outline. Academic records and public deployment remain separate.

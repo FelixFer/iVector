@@ -1,3 +1,4 @@
+import { CopyEmail } from "@/components/page-accent";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { AcademicPage, ResourceLinks } from "@/components/academic-page";
@@ -20,7 +21,7 @@ export default async function PeoplePage() {
   }
 
   return (
-    <AcademicPage title="People">
+    <AcademicPage accent="People" title="People">
       {people.length ? Array.from(groups, ([role, members]) => (
         <section key={role}>
           <h2>{role}</h2>
@@ -35,6 +36,7 @@ export default async function PeoplePage() {
                 {studentId && <p>Student ID: {studentId}</p>}
                 {nationality && <p>{nationality}</p>}
                 {email && <a className={styles.email} href={`mailto:${email}`}>{email}</a>}
+                {email && <CopyEmail email={email} />}
                 {interests && <p>{interests}</p>}
                 {profile && <ResourceLinks links={[profile]} />}
                 </div>

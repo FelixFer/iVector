@@ -1,0 +1,14 @@
+.accent { width: 96px; height: 72px; flex: none; pointer-events: none; }
+.accent svg { display: block; width: 100%; height: 100%; }
+.accent[data-play="true"] .detail { animation: settle 400ms steps(3, end) both; transform-box: fill-box; transform-origin: center; }
+.accent[data-kind="About"][data-play="true"] .detail { animation-name: warm; animation-duration: 500ms; }
+.accent[data-kind="Research"][data-play="true"] .detail { animation-name: draw; transform-origin: left; }
+.accent[data-kind="Projects"][data-play="true"] .detail { animation-name: draw; }
+.accent[data-kind="Publications"][data-play="true"] .detail { animation-duration: 350ms; }
+@keyframes settle { from { transform: translateY(-2px); } to { transform: none; } }
+@keyframes warm { from { fill: #ddc7af; } to { fill: #edc987; } }
+@keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.copy { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; font-size: 0.75rem; }
+.copy > span { min-height: 1.5em; min-width: 10rem; }
+@media (max-width: 479px) { .accent { width: 80px; height: 60px; } }
+@media (prefers-reduced-motion: reduce) { .accent .detail { animation: none !important; } }

@@ -150,3 +150,7 @@ Use local component state for simple interactions such as mobile menu visibility
 
 Academic pages call the server-side loadContent adapter at build time. It reads published Contentful CDA records when configured and validates them before rendering; with no CMS configuration it uses local approved records. The public export remains static. See CMS_HANDOFF.md for activation and credential boundaries.
 
+
+## Page accents
+
+AcademicPage accepts an optional typed accent variant. PageAccent and CopyEmail are small client leaves; page content and CMS loading remain on the server. Accents reuse useSceneMotion; copying uses the native Clipboard API with selectable mailto fallback. No dependencies or CMS fields added.

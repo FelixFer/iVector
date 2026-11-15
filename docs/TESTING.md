@@ -119,3 +119,14 @@ Compare the desktop implementation with the [linked Figma frames](PRD.md#1-produ
 - Virtual Lab scene and narrow-screen layout.
 
 Record significant deviations and either correct them or document an approved reason.
+
+P1 checks cover persistent manual pause, live system reduced motion, invalid/blocked storage, position restore, entrance reset and collision walking feedback. Legacy navigation scenarios clear the session-position key on each load to preserve a fresh-entry fixture.
+
+
+## P1 extension verification
+
+Lint, TypeScript and static production export passed. Final full browser suite passed 31 tests. Responsive checks covered all seven routes at 320, 767, 768, 896 and 1280 px. Axe checks covered all seven pages and 404. New tests cover reduced-motion decorative accents, one-shot completion/pause-resume, clipboard success and rejection with mailto preserved. Desktop/mobile screenshots were reviewed.
+
+Anti-Slop delivery gate: Hard Gate PASS (responsive overflow assertions, axe, factual empty states and supplied member records); Purpose Gate PASS (small page-specific art identifies sections, reserved dimensions prevent shifts, existing tokens preserve identity); Liveliness PASS (ENERGY 2 / RHYTHM 2 / MOTION 1, stationary reading content, brief once-only accents); Craft PASS (production build, native clipboard failure feedback, keyboard/touch/navigation suite, rendered review). No new dependencies. Physical-device testing and public deployment remain unverified.
+
+Animation-control removal: regression coverage verifies no animation buttons on Home or Virtual Lab, ignores legacy manual-pause storage, and responds live to system reduced-motion changes.

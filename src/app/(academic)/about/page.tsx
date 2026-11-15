@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default async function AboutPage() {
   const { about } = await loadContent();
   return (
-    <AcademicPage title="About iVector Lab">
+    <AcademicPage accent="About" title="About iVector Lab">
       <section aria-label="Lab identity">
         <p>{site.name} · {site.department}<br />{site.university} · {site.location}</p>
         {about.introduction && <p>{about.introduction}</p>}
@@ -34,8 +34,8 @@ export default async function AboutPage() {
         </section>
       )}
       <div className={styles.actions}>
-        <Link className="button" href="/research/">Explore research</Link>
-        <Link className="button button-secondary" href="/people/">Meet the lab</Link>
+        <Link className="button" href="/research/">Explore research <span className={styles.arrow} aria-hidden="true">→</span></Link>
+        <Link className="button button-secondary" href="/people/">Meet the lab <span className={styles.arrow} aria-hidden="true">→</span></Link>
       </div>
     </AcademicPage>
   );

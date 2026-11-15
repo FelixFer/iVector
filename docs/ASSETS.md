@@ -74,3 +74,10 @@ Prefer reliable font loading and provide sensible fallback fonts. Confirm licens
 - Provide responsive dimensions where practical.
 - Avoid unnecessarily large assets.
 - Set width and height or aspect ratio to reduce layout shifts.
+
+P1 adds an original decorative cloud SVG in src/components/motion.tsx and decorative monitor overlays in the Virtual Lab controller. They use the existing artwork coordinate systems, have no accessible control role, and do not change collision geometry.
+
+
+## P1 extension artwork
+
+Original inline SVG illustrations in src/components/page-accent.tsx were authored for this project: lamp/notebook, sketchbook, monitor, meeting table/chairs, and books/bookmark. Generic decorative objects, no depiction of actual facilities or people; hidden from assistive technology. No external source or license required.

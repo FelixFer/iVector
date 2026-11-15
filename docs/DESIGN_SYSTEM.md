@@ -115,3 +115,15 @@ Room-name signs use Plus Jakarta Sans at a minimum 12 px with pastel surfaces, r
 - Correct use of pastel accents.
 - Readable contrast.
 - No unnecessary visual effects.
+
+## P1 cozy motion
+
+Home uses one 16-second pixel cloud, clipped inside the window. Shared controls use 140 ms color/border transitions; Home arrows shift 1 px. Research and Projects monitors wake for 400 ms on room entry. Nearby visible guides face the visitor and greet once per visit for 400 ms. Text and dialogue stay stationary.
+
+Animation controls are automatic: system reduced motion suppresses cosmetic motion. There is no manual pause button or stored manual preference. Start still before reading preferences. Ambient motion pauses offscreen/when hidden. Cosmetic pauses do not disable user-controlled character movement.
+
+Walking legs reflect actual displacement rather than held input. Blocked nearby guides show doorway guidance. Same-tab session position/facing are restored only if valid against current collision geometry. Return to entrance resets position and focus without scrolling.
+
+## P1 page accents
+
+ENERGY 2 / RHYTHM 2 / MOTION 1. Small heading illustrations distinguish the five academic directories without moving reading content. About uses a lamp/notebook (500 ms); Research sketchbook and Projects monitor use 400 ms reveals; People chairs settle over 400 ms; Publications bookmark settles over 350 ms. Reserved sizes are 96 × 72 px, or 80 × 60 px below 480 px. Accents sit below headings on phones. All art is decorative, generic, and pointer-transparent. Sequences run once on visibility and are skipped when paused; no missed animation replays. Existing pastel tokens and typography preserve visual continuity. Portrait outlines identify the active member row; copy feedback reserves inline space. Virtual Lab outlines the current room over 220 ms. Home cloud starts four seconds into its seamless loop so it is visible promptly.

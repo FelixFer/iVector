@@ -3,6 +3,8 @@ import { expect, test } from "@playwright/test";
 import { navigation } from "../src/data/site";
 import { people, projects, publications, researchAreas } from "../src/data/content";
 
+test.beforeEach(async ({ page }) => { await page.addInitScript(() => sessionStorage.removeItem("ivector-position-v1")); });
+
 const destinations = navigation.slice(2, 6);
 const emptyStates = [
   { href: "/research/", records: researchAreas, text: "No research areas listed." },

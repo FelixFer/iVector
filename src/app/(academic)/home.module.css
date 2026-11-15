@@ -70,3 +70,12 @@
 @media (min-width: 56rem) {
   .directory { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+
+.illustration { position: relative; }
+.directory svg { transition: transform 140ms; }
+html[data-motion-paused="false"] .directory a:hover svg, html[data-motion-paused="false"] .directory a:focus-visible svg { transform: translateX(1px); }
+@media (prefers-reduced-motion: reduce) { .directory svg { transition: none; transform: none !important; } }
+
+html[data-motion-paused="false"] .enterLab:hover svg, html[data-motion-paused="false"] .enterLab:focus-visible svg { animation: door-open 300ms steps(3, end) both; transform-origin: left; }
+@keyframes door-open { 0% { transform: scaleX(1); } 50% { transform: scaleX(.4); } 100% { transform: scaleX(1) translateX(1px); } }
+@media (prefers-reduced-motion: reduce) { .enterLab svg { animation: none !important; } }

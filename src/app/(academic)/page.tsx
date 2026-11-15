@@ -1,3 +1,4 @@
+import { WorkspaceAmbience } from "@/components/motion";
 import Image from "next/image";
 import Link from "next/link";
 import { loadContent } from "@/data/load-content";
@@ -25,9 +26,12 @@ export default async function HomePage() {
             <Link className="button button-secondary" href="/research/">Explore Research</Link>
           </div>
         </div>
+        <div>
         <figure className={styles.illustration}>
           <Image src="/art/workspace.svg" width={480} height={360} alt="" unoptimized preload />
+        <WorkspaceAmbience />
         </figure>
+        </div>
       </section>
 
       {researchAreas.length > 0 && (
