@@ -1,4 +1,6 @@
+import { themeInit } from "@/components/theme-init";
 import { MotionProvider } from "@/components/motion";
+import { AtmosphereProvider } from "@/components/atmosphere";
 import type { Metadata } from "next";
 import "@fontsource/pixelify-sans/700.css";
 import "@fontsource-variable/plus-jakarta-sans";
@@ -14,10 +16,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head><script dangerouslySetInnerHTML={{ __html: themeInit }} /></head>
       <body>
         <a className="skip-link" href="#main">Skip to content</a>
-        <MotionProvider>{children}</MotionProvider>
+        <MotionProvider><AtmosphereProvider>{children}</AtmosphereProvider></MotionProvider>
       </body>
     </html>
   );

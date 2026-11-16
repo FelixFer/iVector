@@ -43,3 +43,7 @@ From a securely authenticated local CLI, export the selected space/environment w
 ## Configuration and failure behavior
 
 With all delivery variables absent, the site uses the approved local records. Partial configuration, failed delivery requests, bad records, missing referenced images, or invalid image metadata fail the build. Only CDA published content is fetched; no Preview API or Management API credentials enter the public build. Research, Projects and Publications retain their agreed empty states.
+
+## P2 optional connections
+
+The four directory models accept relatedIds, an optional array of stable content ID strings (not display names or Entry links). The setup script adds this field to existing models using their current version and preserves all other definitions and entries. Reruns leave a compatible existing field untouched. Setup stops if a model has pending/unpublished schema edits or an incompatible relationship field; review and activate those edits before rerunning. Review schema compatibility before running against a live space. Entry publication still requires human review; setup does not publish entries. Broken/self references fail the site build. Remove inbound references before unpublishing a record. Live provisioning remains pending account access.

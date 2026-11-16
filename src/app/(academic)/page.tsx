@@ -1,5 +1,6 @@
+import { recordHref } from "@/data/records";
 import { WorkspaceAmbience } from "@/components/motion";
-import Image from "next/image";
+import { WorkspaceArt } from "@/components/workspace-art";
 import Link from "next/link";
 import { loadContent } from "@/data/load-content";
 import { navigation, site } from "@/data/site";
@@ -28,7 +29,7 @@ export default async function HomePage() {
         </div>
         <div>
         <figure className={styles.illustration}>
-          <Image src="/art/workspace.svg" width={480} height={360} alt="" unoptimized preload />
+          <WorkspaceArt />
         <WorkspaceAmbience />
         </figure>
         </div>
@@ -39,7 +40,7 @@ export default async function HomePage() {
           <h2>Research areas</h2>
           <ul className={styles.previews}>
             {researchAreas.slice(0, 3).map(({ id, title, description }) => (
-              <li key={id}><h3>{title}</h3><p>{description}</p></li>
+              <li key={id}><h3><Link href={recordHref("research", id)}>{title}</Link></h3><p>{description}</p></li>
             ))}
           </ul>
           <Link href="/research/">All research areas</Link>
@@ -50,7 +51,7 @@ export default async function HomePage() {
           <h2>Selected projects</h2>
           <ul className={styles.previews}>
             {projects.slice(0, 3).map(({ id, title, description }) => (
-              <li key={id}><h3>{title}</h3><p>{description}</p></li>
+              <li key={id}><h3><Link href={recordHref("projects", id)}>{title}</Link></h3><p>{description}</p></li>
             ))}
           </ul>
           <Link href="/projects/">All projects</Link>

@@ -137,7 +137,7 @@ News & Events must not appear in navigation, footer, homepage, or sitemap.
 - Scene destinations have accessible names, visible focus states, and support mouse, keyboard, and touch.
 - Support a playable pixel character at every width, using arrow keys/WASD while the scene is focused and 44 px directional touch controls. Keep four direct destination links below the scene, including without JavaScript.
 - Move at 36 scene units/second with equal diagonal speed. Focus the scene once on arrival without scrolling, unless the visitor has already focused another control. Tab leaves normally and does not trigger refocusing.
-- Provide connected doorways and collision with walls, furniture, and guide footprints. Start in the central corridor on each reload.
+- Provide connected doorways and collision with walls, furniture, and guide footprints. Restore valid same-tab session position/facing; otherwise start in the central corridor.
 - Provide a 24-unit-wide vertical corridor, 16-unit-high horizontal corridor, and doorways at least 16 units wide. Show readable room-name signs and a nearby E to talk prompt (Tap guide to talk on touch devices).
 - Include one stationary fictional website guide per room. Visitors can activate its button directly or press E within 12 scene units. A modal offers navigation guidance, an explicit destination link, and Close; Escape dismisses and restores focus.
 - Walls block guide interaction: hide nearby prompts and Talk actions, ignore E, and disable direct NPC activation when a wall crosses the player-to-guide line. Open doorways permit interaction. Direct page links remain available.
@@ -221,3 +221,13 @@ Potential future work, not required for the initial release:
 | Production host and domain | Project owner | Launch |
 
 The project owner approved Virtual Lab artwork on 2026-11-13. Academic content sign-off remains separate.
+
+## P2 approved discovery and atmosphere requirements
+
+Directory filters: Research category, Projects category/year, People role, Publications year. Render a facet only when at least two supplied values exist. Combine selections, provide Reset filters and polite result counts, hide empty role groups, and preserve full server-rendered lists without JavaScript. No search.
+
+Records can carry optional relatedIds pointing to explicitly approved academic relationships. Derive reverse links, validate targets and expose stable anchors; reveal filtered anchor destinations. No inferred authorship or invented content.
+
+Atmosphere defaults to Manual Day. Visitors can choose Day/Night or opt into Automatic (Asia/Taipei, Day 06:00–17:59). Persist explicit preferences; fallback to Manual Day for invalid/unavailable storage. Change decorative Home/Virtual Lab art only, instantly, preserving scene geometry and interaction.
+
+Full-site Day/Night mode applies to all seven pages and 404, preserving Manual Day default, saved choices and existing Automatic schedule. Picker must anchor to its trigger rather than the viewport edge; public label is Automatic.

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { LabMapArt } from "@/components/lab-map-art";
 import { useSceneMotion } from "@/components/motion";
 import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
@@ -131,7 +131,7 @@ export default function Playable() {
         if (keys[key]) { event.preventDefault(); held.current.set(`key:${key}`, keys[key]); }
         if (key === "e" && nearby && !event.repeat) { event.preventDefault(); talk(nearby, event.currentTarget); }
       }}>
-      <Image src="/art/lab-map.svg" alt="" width={960} height={560} unoptimized preload />
+      <LabMapArt />
       {ready && active && wake === room && <svg key={room} className={styles.monitorWake} viewBox="0 0 240 140" aria-hidden="true"><path fill="#fff7e9" d={room === "Research" ? "M36 26.8h11v4.8H36z" : "M150 27.6h11v4.8h-11zM186 27.6h11v4.8h-11z"} /></svg>}
       {room !== "Central corridor" && <svg key={room} className={styles.roomOutline} data-animate={active} viewBox="0 0 240 140" aria-hidden="true"><rect x={room === "Research" || room === "People" ? 13 : 137} y={room === "Research" || room === "Projects" ? 10 : 82} width="90" height={room === "Research" || room === "Projects" ? 47 : 42} /></svg>}
       {guides.map(g => <span key={g.href} className={`${styles.roomSign} ${styles[g.label.toLowerCase()]}`} data-room={g.label}

@@ -40,3 +40,15 @@ Significant project changes are recorded here. Keep entries concise and date the
 - Kept academic records, typography, empty states, and CMS models unchanged.
 
 - Removed manual animation buttons and their stored preference. System reduced motion and offscreen/hidden suspension remain active.
+
+### P2 discovery and atmosphere
+
+- Add relevant native directory filters with complete no-JavaScript lists.
+- Add validated optional academic connections, reverse links and record anchors.
+- Add Manual Day/Night artwork with optional Taiwan-time Automatic mode.
+- Add restrained navigation, portrait, destination and control hover/focus feedback.
+- Preserve existing academic records, scene geometry, reduced motion and direct navigation.
+
+- Move atmosphere control to every header; replace inline fieldsets with a pixel sun/moon switch and accessible picker. Adapt header rows and navigation breakpoint for mobile/tablet.
+
+- Add full-site warm charcoal Night theme, guarded pre-paint preference loading, button-anchored picker positioning and pixel palette icon. Shorten Automatic label.

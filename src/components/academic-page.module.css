@@ -49,8 +49,15 @@
 
 .heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.65rem; }
 .heading h1 { min-width: 0; }
-.person:hover .portrait, .person:focus-within .portrait { outline: 2px solid var(--color-link); outline-offset: 3px; }
-.resources a:hover, .resources a:focus-visible { text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.portrait { transition: background-color 140ms; }
+.person:focus-within .portrait { outline: 2px solid var(--color-link); outline-offset: 3px; background: var(--color-green); }
+.resources a:focus-visible, .email:focus-visible { color: var(--color-link-hover); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+@media (hover: hover) and (pointer: fine) {
+  .person:hover .portrait { outline: 2px solid var(--color-link); outline-offset: 3px; background: var(--color-green); }
+  .resources a:hover, .email:hover { color: var(--color-link-hover); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  html[data-motion-paused="false"] .actions a:hover .arrow { transform: translateX(1px); }
+}
 .arrow { display: inline-block; margin-left: .5rem; }
-html[data-motion-paused="false"] .actions a:hover .arrow, html[data-motion-paused="false"] .actions a:focus-visible .arrow { transform: translateX(1px); }
+html[data-motion-paused="false"] .actions a:focus-visible .arrow { transform: translateX(1px); }
+@media (prefers-reduced-motion: reduce) { .portrait { transition: none; } .arrow { transform: none !important; } }
 @media (max-width: 479px) { .heading { align-items: start; flex-direction: column; gap: .75rem; } }

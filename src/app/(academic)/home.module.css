@@ -23,7 +23,7 @@
   min-width: 0;
   margin: 0;
   padding: clamp(0.5rem, 1.25vw, 1rem);
-  background: var(--color-text);
+  background: var(--art-frame);
   clip-path: polygon(8px 0, calc(100% - 8px) 0, calc(100% - 8px) 4px, 100% 4px, 100% calc(100% - 4px), calc(100% - 8px) calc(100% - 4px), calc(100% - 8px) 100%, 8px 100%, 8px calc(100% - 4px), 0 calc(100% - 4px), 0 4px, 8px 4px);
 }
 
@@ -60,7 +60,12 @@
   text-decoration: none;
 }
 
-.directory a:hover { color: var(--color-link); text-decoration: underline; }
+.directory a { padding-inline: 0.65rem; transition: background-color 140ms, color 140ms, box-shadow 140ms; }
+.directory a:focus-visible { background: var(--color-blue); box-shadow: inset 2px 0 var(--color-link); color: var(--color-link); text-decoration: underline; }
+@media (hover: hover) and (pointer: fine) {
+  .directory a:hover { background: var(--color-blue); box-shadow: inset 2px 0 var(--color-link); color: var(--color-link); text-decoration: underline; }
+}
+.directory a:active { background: var(--color-blue); }
 .directory svg { flex: none; color: var(--color-link); }
 
 @media (min-width: 48rem) {
@@ -73,9 +78,13 @@
 
 .illustration { position: relative; }
 .directory svg { transition: transform 140ms; }
-html[data-motion-paused="false"] .directory a:hover svg, html[data-motion-paused="false"] .directory a:focus-visible svg { transform: translateX(1px); }
-@media (prefers-reduced-motion: reduce) { .directory svg { transition: none; transform: none !important; } }
+html[data-motion-paused="false"] .directory a:focus-visible svg { transform: translateX(1px); }
+@media (hover: hover) and (pointer: fine) {
+  html[data-motion-paused="false"] .directory a:hover svg { transform: translateX(1px); }
+  html[data-motion-paused="false"] .enterLab:hover svg { animation: door-open 300ms steps(3, end) both; transform-origin: left; }
+}
+@media (prefers-reduced-motion: reduce) { .directory a, .directory svg { transition: none; } .directory svg { transform: none !important; } }
 
-html[data-motion-paused="false"] .enterLab:hover svg, html[data-motion-paused="false"] .enterLab:focus-visible svg { animation: door-open 300ms steps(3, end) both; transform-origin: left; }
+html[data-motion-paused="false"] .enterLab:focus-visible svg { animation: door-open 300ms steps(3, end) both; transform-origin: left; }
 @keyframes door-open { 0% { transform: scaleX(1); } 50% { transform: scaleX(.4); } 100% { transform: scaleX(1) translateX(1px); } }
 @media (prefers-reduced-motion: reduce) { .enterLab svg { animation: none !important; } }

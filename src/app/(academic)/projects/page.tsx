@@ -1,3 +1,6 @@
+import { DirectoryFilters } from "@/components/directory-filters";
+import { RelatedRecords } from "@/components/related-records";
+import { recordAnchor } from "@/data/records";
 import type { Metadata } from "next";
 import { AcademicPage, ResourceLinks } from "@/components/academic-page";
 import styles from "@/components/academic-page.module.css";
@@ -9,13 +12,15 @@ export const metadata: Metadata = {
 };
 
 export default async function ProjectsPage() {
-  const { projects } = await loadContent();
+  const content = await loadContent();
+  const { projects } = content;
   return (
     <AcademicPage accent="Projects" title="Projects">
+      <DirectoryFilters records={projects.map(record => ({ id: record.id, category: record.category, year: record.year }))} facets={["category","year"]}>
       {projects.length ? (
         <ul className={styles.rows}>
           {projects.map(({ id, title, subtitle, description, year, category, links }) => (
-            <li key={id}>
+            <li key={id} id={recordAnchor(id)} data-record tabIndex={-1}>
               <div className={styles.rowHeading}>
                 <h2>{title}</h2>
                 {year && <span className={styles.meta}>{year}</span>}
@@ -24,10 +29,12 @@ export default async function ProjectsPage() {
               <p>{description}</p>
               {category && <p className={styles.meta}>{category}</p>}
               <ResourceLinks links={links} />
+              <RelatedRecords content={content} id={id} />
             </li>
           ))}
         </ul>
       ) : <p>No projects listed.</p>}
+      </DirectoryFilters>
     </AcademicPage>
   );
 }

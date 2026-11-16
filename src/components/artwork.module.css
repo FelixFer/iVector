@@ -1,0 +1,8 @@
+.workspace, .labMap { display: block; width: 100%; height: auto; pointer-events: none; }
+.labMap { border-radius: var(--radius); }
+.night { display: none; }
+:global(html[data-atmosphere="night"]) .workspace { --workspace-wall: #d6c6b7; --workspace-sky: #596b7e; --workspace-floor: #c6af99; --workspace-hills: #71858b; --workspace-trees: #5b7b73; --workspace-lamp: #ffe1a1; }
+:global(html[data-atmosphere="night"]) .labMap { --lab-surround: #c5b6a4; --lab-floor: #e3d3bb; --lab-grout: #cebaa0; --lab-wall: #dccab3; --lab-research: #c6cdd1; --lab-projects: #ced3c2; --lab-people: #dcc5ae; --lab-publications: #d4c6d3; --lab-screen: #f2deb0; }
+:global(html[data-atmosphere="night"]) .day { display: none; }
+:global(html[data-atmosphere="night"]) .night { display: block; }
+:global(html[data-atmosphere="night"]) .workspace + :global(.workspace-ambience) { display: none; }

@@ -11,6 +11,7 @@ export type Photo = {
 };
 
 export type ResearchArea = {
+  relatedIds?: readonly string[];
   id: string;
   title: string;
   description: string;
@@ -18,6 +19,7 @@ export type ResearchArea = {
 };
 
 export type Project = {
+  relatedIds?: readonly string[];
   id: string;
   title: string;
   description: string;
@@ -28,6 +30,7 @@ export type Project = {
 };
 
 export type Person = {
+  relatedIds?: readonly string[];
   id: string;
   name: string;
   role: string;
@@ -41,6 +44,7 @@ export type Person = {
 };
 
 export type Publication = {
+  relatedIds?: readonly string[];
   id: string;
   title: string;
   authors: readonly string[];

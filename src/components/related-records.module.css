@@ -1,0 +1,6 @@
+.related { margin-top: .75rem; }
+.related p { font-size: .8125rem; font-weight: 700; }
+.related ul { display: flex; flex-wrap: wrap; gap: 0 1rem; padding: 0; margin: 0; list-style: none; }
+.related a { display: inline-flex; align-items: center; min-height: 44px; font-size: .875rem; overflow-wrap: anywhere; }
+.related a:focus-visible { text-decoration-thickness: 2px; text-underline-offset: 4px; }
+@media (hover: hover) and (pointer: fine) { .related a:hover { text-decoration-thickness: 2px; text-underline-offset: 4px; } }

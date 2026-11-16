@@ -46,3 +46,13 @@ Record accepted decisions here. Add new entries with a date, context, decision, 
 - **Context:** The first milestone is a locally reviewable English-language site with a portable build.
 - **Decision:** Use Next.js App Router, strict TypeScript, npm, CSS Modules, and static export.
 - **Consequences:** Site content ships with each build. The production host and domain are selected after content sign-off.
+
+## D-008 — P2 discovery and atmosphere
+
+- **Status:** Accepted, 2026-11-16.
+- **Decision:** Add relevant filters and explicitly supplied academic connections; exclude search and scene content objects. Default to Manual Day with visitor-controlled Day/Night, retaining Automatic Asia/Taipei as an opt-in. Scope atmosphere to decorative artwork.
+- **Consequences:** Empty datasets do not gain filler or useless controls; links require verified relationships. Existing geometry, academic typography and ivory reading areas stay consistent.
+
+## D-009 — Full-site Night theme
+
+Accepted 2026-11-16: Day/Night now controls the entire UI as well as artwork. Manual Day remains the default; Automatic retains the existing schedule with a shorter visible label. Warm charcoal surfaces preserve the cozy academic identity.

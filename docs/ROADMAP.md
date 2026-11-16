@@ -63,3 +63,11 @@ Prioritize correctness, responsive behavior, content integrity, and core navigat
 ### P1 extension implemented locally
 
 Five decorative heading accents, Home cloud phase and door gesture, member portrait focus/copy-email feedback, resource link feedback, and Virtual Lab current-room outline. Academic records and public deployment remain separate.
+
+## P2 filters, connections and atmosphere
+
+- Relevant directory facets with server-rendered no-JavaScript fallback.
+- Explicit academic relatedIds and stable direct record links; no fabricated edges.
+- Manual Day/Night default, optional Taiwan-time Automatic mode.
+- Restrained hover/focus/pressed feedback and unchanged scene geometry.
+- Search, scene content objects, live CMS activation and deployment remain deferred.

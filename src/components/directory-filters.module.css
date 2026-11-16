@@ -1,0 +1,13 @@
+.directory [hidden] { display: none !important; }
+.directory > [data-record-group] + [data-record-group] { margin-top: 2.8rem; }
+.directory [data-record] { scroll-margin-top: 1rem; }
+.filters { display: flex; flex-wrap: wrap; align-items: end; gap: .75rem 1rem; margin-bottom: 1.5rem; }
+.filters label { display: grid; gap: .25rem; font-size: .875rem; font-weight: 600; max-width: 100%; }
+.filters select { min-height: 44px; max-width: 100%; padding: .5rem 2rem .5rem .7rem; border: 1px solid var(--color-muted); border-radius: 0; background: var(--color-paper); color: var(--color-text); font: inherit; cursor: pointer; }
+.filters p { align-self: center; color: var(--color-muted); font-size: .875rem; }
+.filters button:disabled { opacity: .6; cursor: default; }
+.empty { margin-bottom: 1rem; }
+.filters select { transition: border-color 140ms; }
+.filters select:focus-visible { border-color: var(--color-link); }
+@media (hover: hover) and (pointer: fine) { .filters select:hover { border-color: var(--color-link); } }
+@media (prefers-reduced-motion: reduce) { .filters select { transition: none; } }

@@ -114,3 +114,7 @@ Suggested groups:
 - Copyright and location.
 
 Do not invent official URLs, email addresses, room numbers, or status details.
+
+## Global atmosphere access
+
+All seven pages and 404 expose the same atmosphere switch/picker in their header, outside the mobile navigation disclosure. Virtual Lab keeps Back to Website adjacent. Home artwork and scene movement controls contain no duplicate atmosphere controls.

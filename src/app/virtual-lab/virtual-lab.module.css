@@ -6,9 +6,9 @@
 .instructions { margin-bottom: 0.75rem; font-size: 0.875rem; color: var(--color-muted); }
 .scene { position: relative; container-type: inline-size; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); }
 .scene img { display: block; width: 100%; border-radius: var(--radius); pointer-events: none; }
-.roomSign { position: absolute; transform: translateX(-50%); padding-inline: 3px; background: var(--destination); color: var(--color-text); font: 600 0.75rem / 1 var(--font-sans); white-space: nowrap; pointer-events: none; }
+.roomSign { position: absolute; transform: translateX(-50%); padding-inline: 3px; background: var(--scene-paper); color: var(--scene-text); font: 600 0.75rem / 1 var(--font-sans); white-space: nowrap; pointer-events: none; }
 .roomSign[data-room="Publications"] { transform: translateX(-100%); }
-.talkPrompt { position: absolute; z-index: 3; max-width: 7.5rem; padding: 0.25rem 0.4rem; background: var(--color-text); color: var(--color-paper); font: 600 0.75rem / 1.4 var(--font-sans); pointer-events: none; }
+.talkPrompt { position: absolute; z-index: 3; max-width: 7.5rem; padding: 0.25rem 0.4rem; background: var(--scene-text); color: var(--scene-paper); font: 600 0.75rem / 1.4 var(--font-sans); pointer-events: none; }
 .touchPrompt { display: none; }
 @media (pointer: coarse) { .touchPrompt { display: inline; } .keyboardPrompt { display: none; } }
 .sprite { display: block; width: clamp(14px, 3.333cqw, 32px); height: auto; }
@@ -39,7 +39,19 @@
 .publications { --destination: var(--color-lavender); }
 .destinations { display: grid; gap: 0.5rem; margin-top: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); }
 .destinations a { display: flex; align-items: center; min-height: 44px; padding: 0.45rem 0.75rem; border: 1px solid var(--color-border); background: var(--destination); color: var(--color-text); font-weight: 700; }
-.destinations a:hover { border-color: var(--color-link); }
+.destinations a { justify-content: space-between; gap: 0.5rem; transition: border-color 140ms, color 140ms; }
+.destinations a > span { transition: transform 140ms; }
+.destinations a:focus-visible { border-color: var(--color-link); color: var(--color-link); }
+html[data-motion-paused="false"] .destinations a:focus-visible > span { transform: translateX(1px); }
+@media (hover: hover) and (pointer: fine) {
+  .destinations a:hover { border-color: var(--color-link); color: var(--color-link); }
+  html[data-motion-paused="false"] .destinations a:hover > span { transform: translateX(1px); }
+}
+.destinations a:active { border-color: var(--color-link); }
+@media (prefers-reduced-motion: reduce) {
+  .destinations a, .destinations a > span { transition: none; }
+  .destinations a > span { transform: none !important; }
+}
 .dialog { width: min(30rem, calc(100% - 2rem)); max-height: calc(100% - 2rem); padding: clamp(1rem, 4vw, 2rem); border: 2px solid var(--color-text); background: var(--color-paper); color: var(--color-text); }
 .dialog::backdrop { background: rgb(52 58 64 / 40%); }
 .dialog p { margin-top: 0.75rem; }
@@ -55,7 +67,12 @@ html:not([data-motion-paused="false"]) .legs { animation: none; }
 @media (prefers-reduced-motion: reduce) { .monitorWake, .guide .sprite { animation: none !important; } }
 
 .roomOutline { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.roomOutline rect { fill: none; stroke: var(--color-link); stroke-width: .5px; opacity: .55; }
+.roomOutline rect { fill: none; stroke: var(--scene-ink); stroke-width: .5px; opacity: .55; }
 .roomOutline[data-animate="true"] { transition: opacity 220ms ease-out; }
 @starting-style { .roomOutline[data-animate="true"] { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .roomOutline { transition: none !important; } }
+
+.headerInner > a:nth-child(2) { margin-left: auto; font-size: .8rem; text-align: center; }
+@media (max-width: 479px) { .headerInner { flex-wrap: wrap; padding-block: .5rem; gap: .5rem; } .headerInner > a:first-child { flex-basis: 100%; } .headerInner > a:nth-child(2) { margin-left: 0; margin-right: auto; } }
+
+.guide:focus-visible { outline-color: var(--scene-ink); }

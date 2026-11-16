@@ -33,7 +33,7 @@ test("Home hero opens the lab and research by keyboard and touch", async ({ page
   }
 });
 
-for (const width of [320, 767, 768, 896, 1280]) {
+for (const width of [320, 767, 768, 896, 1152, 1280]) {
   test(`exported pages fit a ${width}px viewport`, async ({ page }, testInfo) => {
     await page.setViewportSize({ width, height: 900 });
 
@@ -57,7 +57,9 @@ for (const width of [320, 767, 768, 896, 1280]) {
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
 
       if (href === "/" || href === "/virtual-lab/") {
-        expect(await page.locator("main img").evaluate((image: HTMLImageElement) => image.decode().then(() => image.naturalWidth))).toBeGreaterThan(0);
+        const art = page.locator('main svg[data-artwork]');
+        await expect(art).toBeVisible();
+        await expect(art).toHaveAttribute("viewBox", href === "/" ? "0 0 120 90" : "0 0 240 140");
       }
       if (href === "/virtual-lab/") {
         const signs = page.locator("[data-room]");

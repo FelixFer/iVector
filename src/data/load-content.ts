@@ -1,5 +1,6 @@
 import { cache } from "react";
 import * as local from "./content";
+import { validateRecords } from "./records";
 
 type Snapshot = { -readonly [K in "homeIntroduction" | "about" | "researchAreas" | "projects" | "people" | "publications"]: (typeof local)[K] };
 type Entry = { sys: { id: string; contentType?: { sys: { id: string } } }; fields: Record<string, unknown> };
@@ -40,17 +41,18 @@ export function decodeContentful(entries: Entry[], assets: Entry[] = []): Snapsh
     const id = text(f.id ?? entry.sys.id, "id", true)!;
     if (seen.has(id)) throw new Error(`Duplicate content ID: ${id}`);
     seen.add(id);
+    const relatedIds = f.relatedIds === undefined ? undefined : Array.isArray(f.relatedIds) ? [...new Set(f.relatedIds.map(id => text(id, "relatedIds", true)!))] : (() => { throw new Error("Invalid relatedIds"); })();
     if (kind === "person") {
       const email = text(f.email, "email"), studentId = text(f.studentId, "studentId");
       if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("Invalid email");
       if (studentId && !/^\d+$/.test(studentId)) throw new Error("Invalid student ID");
-      result.people = [...result.people, { id, name: text(f.name, "name", true)!, role: text(f.role, "role", true)!, studentId, email, nationality: text(f.nationality, "nationality"), initials: text(f.initials, "initials"), interests: text(f.interests, "interests"), profile: f.profileUrl ? { label: "Official profile", href: url(f.profileUrl) } : undefined, photo: photo(f, "photo") }];
+      result.people = [...result.people, { id, relatedIds, name: text(f.name, "name", true)!, role: text(f.role, "role", true)!, studentId, email, nationality: text(f.nationality, "nationality"), initials: text(f.initials, "initials"), interests: text(f.interests, "interests"), profile: f.profileUrl ? { label: "Official profile", href: url(f.profileUrl) } : undefined, photo: photo(f, "photo") }];
     } else if (kind === "publication") {
       if (!Number.isInteger(f.year) || Number(f.year) < 1900 || Number(f.year) > new Date().getFullYear() + 1) throw new Error("Invalid publication year");
       if (!Array.isArray(f.authors) || !f.authors.length) throw new Error("Missing publication authors");
-      result.publications = [...result.publications, { id, title: text(f.title, "title", true)!, authors: f.authors.map(a => text(a, "author", true)!), venue: text(f.venue, "venue", true)!, year: Number(f.year), paper: f.paperUrl ? { label: "Paper", href: url(f.paperUrl) } : undefined }];
+      result.publications = [...result.publications, { id, relatedIds, title: text(f.title, "title", true)!, authors: f.authors.map(a => text(a, "author", true)!), venue: text(f.venue, "venue", true)!, year: Number(f.year), paper: f.paperUrl ? { label: "Paper", href: url(f.paperUrl) } : undefined }];
     } else {
-      const base = { id, title: text(f.title, "title", true)!, description: text(f.description, "description", true)!, category: text(f.category, "category") };
+      const base = { id, relatedIds, title: text(f.title, "title", true)!, description: text(f.description, "description", true)!, category: text(f.category, "category") };
       if (kind === "researchArea") result.researchAreas = [...result.researchAreas, base];
       else {
         if (f.year !== undefined && (!Number.isInteger(f.year) || Number(f.year) < 1900 || Number(f.year) > new Date().getFullYear() + 1)) throw new Error("Invalid project year");
@@ -60,12 +62,13 @@ export function decodeContentful(entries: Entry[], assets: Entry[] = []): Snapsh
       }
     }
   }
+  validateRecords(result);
   return result;
 }
 
 export const loadContent = cache(async (): Promise<Snapshot> => {
   const { CONTENTFUL_SPACE_ID: space, CONTENTFUL_DELIVERY_TOKEN: token, CONTENTFUL_ENVIRONMENT: environment } = process.env;
-  if (!space && !token && !environment) return local;
+  if (!space && !token && !environment) { validateRecords(local); return local; }
   if (!space || !token || !environment) throw new Error("Set all Contentful delivery variables or none for local content");
   const entries: Entry[] = [], assets: Entry[] = [];
   let total = 0;

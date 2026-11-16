@@ -1,3 +1,4 @@
+import { AtmosphereControls } from "@/components/atmosphere";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Wordmark } from "@/components/site-shell";
@@ -16,6 +17,7 @@ export default function VirtualLabPage() {
       <div className={`container ${styles.headerInner}`}>
         <Wordmark />
         <Link href="/" className="button button-secondary">Back to Website</Link>
+        <AtmosphereControls />
       </div>
     </header>
     <main className={`container ${styles.main}`} id="main" tabIndex={-1}>
@@ -24,7 +26,7 @@ export default function VirtualLabPage() {
       </div>
       <Playable />
       <nav className={styles.destinations} aria-label="Scene destinations">
-        {guides.map(({ href, label }) => <Link className={styles[label.toLowerCase()]} key={href} href={href}>{label}</Link>)}
+        {guides.map(({ href, label }) => <Link className={styles[label.toLowerCase()]} key={href} href={href}>{label}<span aria-hidden="true">→</span></Link>)}
       </nav>
     </main>
   </>;

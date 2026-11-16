@@ -127,3 +127,21 @@ Walking legs reflect actual displacement rather than held input. Blocked nearby 
 ## P1 page accents
 
 ENERGY 2 / RHYTHM 2 / MOTION 1. Small heading illustrations distinguish the five academic directories without moving reading content. About uses a lamp/notebook (500 ms); Research sketchbook and Projects monitor use 400 ms reveals; People chairs settle over 400 ms; Publications bookmark settles over 350 ms. Reserved sizes are 96 × 72 px, or 80 × 60 px below 480 px. Accents sit below headings on phones. All art is decorative, generic, and pointer-transparent. Sequences run once on visibility and are skipped when paused; no missed animation replays. Existing pastel tokens and typography preserve visual continuity. Portrait outlines identify the active member row; copy feedback reserves inline space. Virtual Lab outlines the current room over 220 ms. Home cloud starts four seconds into its seamless loop so it is visible promptly.
+
+## P2 atmosphere and feedback
+
+ENERGY 2 / RHYTHM 2 / MOTION 1 remains unchanged. Manual Day is the initial atmosphere; Night alters decorative art only so academic reading contrast stays constant. Muted blue night window, moon/stars and warm lamplight distinguish Home; warmer surfaces/monitor light distinguish Virtual Lab without changing geometry. No scene-wide filter affects sprites or signs.
+
+Home directory links use powder-blue hover/focus surfaces and a 2 px inset edge to signal navigation. Related/resource/email links strengthen their underlines so reading rows stay still. Member portrait frames and sage surfaces identify the hovered/focused row without implying the whole row is clickable. Virtual Lab destination arrows move at most 1 px. Reuse 140 ms transitions, immediate focus outlines and square controls; pointer-hover rules require hover capability and a fine pointer. Touch receives pressed feedback. Reduced motion removes cosmetic transforms/transitions.
+
+## Global atmosphere control
+
+One compact pixel switch/picker lives in each page header, including Virtual Lab and 404. Inline Home/movement fieldsets are removed. The 64 px switch and 44 px picker have 44 px height; the sun/moon thumb moves in three steps over 140 ms, instantly with reduced motion. Outer hit targets stay stationary. Press feedback uses an inset edge and hover uses existing pastels. Manual Day remains default; clicking the switch while Automatic is active explicitly selects Manual and flips current lighting. The native nonmodal picker offers Day, Night and Automatic, stays open during selection, and dismisses on Escape/outside click without trapping focus.
+
+Below 480 px, branding takes the first row; navigation/return and atmosphere occupy the second. Hide affiliation below 768 px; full desktop navigation begins at 1152 px. Reserve the 112 × 44 px slot during hydration. No-JavaScript pages retain navigation without functional theme controls.
+
+## Full-site Night theme
+
+Night now themes every page and 404, superseding artwork-only scope. Background/paper/surface: #252724/#30332E/#2B2E29; text/muted: #EEE9DC/#B8BCB1; links/hover: #A9C9DD/#C3DBEA. Muted blue/sage/lavender/peach containers retain the cozy identity. Filled buttons use separate on-accent ink #202A30; control borders #87917F remain stronger than decorative dividers #61675D. Scene labels/prompts/focus use independent ink/paper tokens over the lit artwork; Home frame remains charcoal. color-scheme follows the selected theme.
+
+Picker uses an original inline pixel palette icon with an Automatic clock indicator. Label is Automatic only. Native popover is positioned from trigger bounds, 8 px below with aligned right edges, viewport clamping and limited height; it follows scrolling/resizing and closes when the trigger leaves view.

@@ -81,3 +81,9 @@ P1 adds an original decorative cloud SVG in src/components/motion.tsx and decora
 ## P1 extension artwork
 
 Original inline SVG illustrations in src/components/page-accent.tsx were authored for this project: lamp/notebook, sketchbook, monitor, meeting table/chairs, and books/bookmark. Generic decorative objects, no depiction of actual facilities or people; hidden from assistive technology. No external source or license required.
+
+## P2 atmosphere artwork
+
+Home and Virtual Lab now render native SVG components derived from the existing original workspace.svg and lab-map.svg artwork. Day retains the original composition; Night uses scoped palette changes, a decorative moon/stars and warm lamp/monitor accents. Original viewBoxes (120 × 90 and 240 × 140), furniture and doorways are preserved. All artwork remains decorative and pointer-transparent; no imagery depicts actual members or facilities. Existing SVG files remain the source/provenance reference.
+
+The atmosphere picker now uses an original inline 20 × 20 pixel palette SVG with three muted swatches and a small Automatic clock indicator. It replaces Unicode glyph icons and remains decorative within the labeled button.

@@ -109,6 +109,7 @@ test("keyboard movement starts immediately on direct and Home arrivals without s
     const scene = page.getByRole("group", { name: "Walk around the lab" });
     await page.clock.runFor(100);
     await expect(scene).toBeFocused();
+    await expect(scene).toHaveAttribute("data-motion-active", "true");
     expect(await page.evaluate(() => scrollY)).toBe(0);
     await page.keyboard.down("w"); await page.clock.runFor(200); await page.keyboard.up("w");
     expect((await position(page)).y).toBeLessThan(spawn.y - 5);

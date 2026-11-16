@@ -113,7 +113,7 @@ Represent interactive objects as data where practical:
 
 The page shell and metadata remain server components. `playable.tsx` is the isolated client controller; `scene-data.ts` holds typed guide dialogue, shared destination URLs, geometry, and pure movement/room/proximity functions. The SVG and collision rectangles share 240 × 140 coordinates. Collision uses the character's feet and substeps to prevent crossing obstacles. Movement uses requestAnimationFrame with normalized diagonal speed and capped elapsed time, without a game engine.
 
-Native NPC buttons open one native dialog. Input is scoped to the focused scene or directional controls and cleared on release, blur, visibility change, cancellation, and dialogue opening. Position is local and resets on reload. Direct links render in the static HTML; no-JavaScript visitors retain navigation. Room changes use a status announcement; continuous positions are not announced.
+Native NPC buttons open one native dialog. Input is scoped to the focused scene or directional controls and cleared on release, blur, visibility change, cancellation, and dialogue opening. Position and facing are restored from validated same-tab session storage; Return to entrance resets them. Direct links render in the static HTML; no-JavaScript visitors retain navigation. Room changes use a status announcement; continuous positions are not announced.
 
 Wall rectangles are shared between collision and player-to-guide line-of-sight checks. Nearby prompts require both the 12-unit range and clear sight. Direct NPC buttons and the dialogue handler also check sight, so clicks and taps cannot bypass walls. Doorway openings permit sight; furniture does not block conversations.
 
@@ -154,3 +154,15 @@ Academic pages call the server-side loadContent adapter at build time. It reads 
 ## Page accents
 
 AcademicPage accepts an optional typed accent variant. PageAccent and CopyEmail are small client leaves; page content and CMS loading remain on the server. Accents reuse useSceneMotion; copying uses the native Clipboard API with selectable mailto fallback. No dependencies or CMS fields added.
+
+## P2 progressive discovery
+
+DirectoryFilters is a client leaf around server-rendered records. Supplied facet metadata drives native selects; scoped native hidden states filter rows and empty groups. Controls mount after hydration; no-JavaScript records remain complete. Fragment navigation clears conflicting selections and reveals the record. Selection state stays in memory.
+
+A shared record helper validates IDs/relationships and resolves explicit one-hop forward/reverse links and encoding-safe anchors. relatedIds is optional across all four directory types; names and publication authors are never matched automatically. CMS updates append the missing optional field without replacing existing definitions or entries.
+
+A shared atmosphere provider stores Manual/Automatic and the last manual Day/Night choice. Runtime Taiwan time is used only for Automatic mode; hidden tabs suspend polling. Native SVG artwork keeps the original geometry and uses scoped palette variables. No new runtime services or dependencies.
+
+The existing AtmosphereControls component now renders a header switch and native auto popover. SiteHeader covers academic routes/404; Virtual Lab mounts the same component in its separate header. Provider, preference format and Taiwan clock remain unchanged.
+
+Full-site theme uses the existing data-atmosphere attribute and v1 preference format. A guarded head initializer reads validated saved state before body paint; the provider waits until initialized before applying its state. No new storage key or service. Native picker position is calculated only while open.

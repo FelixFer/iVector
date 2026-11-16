@@ -137,3 +137,7 @@ First collect the Home focus sentence, research directions, and member identity.
 
 Identity-based Home/About copy and the official Yu-Chieh Ho faculty entry are seeded locally. Four master’s students were supplied by the project owner on 2026-11-15: Felix Ferdinand, 李彥龍, 邱柏誠, Vo Cong Vinh. IDs, nationalities and derived institutional emails are owner-provided. Photos are optional with initials fallbacks. Research, Projects and Publications still have no records. Earlier empty-directory inventory describes the pre-P0 state.
 
+
+## P2 academic relationships
+
+Optional relatedIds lists refer to stable IDs from Research, Projects, People, or Publications. Supply a relationship only with approved source material; linking a member does not replace or change the publication author list. One explicit edge produces links in both directions; no transitive or name-based connections. Unknown/self targets fail validation, and repeated references are deduplicated. Remove inbound references before deleting/unpublishing a linked record. IDs are durable because bookmarks depend on them. No relationships have been invented for current seed members.

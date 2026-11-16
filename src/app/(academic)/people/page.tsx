@@ -1,3 +1,6 @@
+import { DirectoryFilters } from "@/components/directory-filters";
+import { RelatedRecords } from "@/components/related-records";
+import { recordAnchor } from "@/data/records";
 import { CopyEmail } from "@/components/page-accent";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -12,7 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default async function PeoplePage() {
-  const { people } = await loadContent();
+  const content = await loadContent();
+  const { people } = content;
   const groups = new Map<string, Person[]>();
   for (const person of people) {
     const group = groups.get(person.role);
@@ -22,12 +26,13 @@ export default async function PeoplePage() {
 
   return (
     <AcademicPage accent="People" title="People">
+      <DirectoryFilters records={people.map(record => ({ id: record.id, role: record.role }))} facets={["role"]}>
       {people.length ? Array.from(groups, ([role, members]) => (
-        <section key={role}>
+        <section key={role} data-record-group>
           <h2>{role}</h2>
           <ul className={styles.rows}>
             {members.map(({ id, name, interests, profile, photo, studentId, email, nationality, initials }) => (
-              <li key={id} className={styles.person}>
+              <li key={id} id={recordAnchor(id)} data-record tabIndex={-1} className={styles.person}>
                 <div className={styles.portrait}>
                   {photo ? <Image {...photo} alt={photo.alt} unoptimized /> : <span aria-hidden="true">{initials || name[0]}</span>}
                 </div>
@@ -39,12 +44,14 @@ export default async function PeoplePage() {
                 {email && <CopyEmail email={email} />}
                 {interests && <p>{interests}</p>}
                 {profile && <ResourceLinks links={[profile]} />}
+                <RelatedRecords content={content} id={id} />
                 </div>
               </li>
             ))}
           </ul>
         </section>
       )) : <p>No member profiles listed.</p>}
+      </DirectoryFilters>
     </AcademicPage>
   );
 }

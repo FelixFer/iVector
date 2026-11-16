@@ -1,3 +1,4 @@
+import { AtmosphereControls } from "./atmosphere";
 import Link from "next/link";
 import { navigation, site } from "@/data/site";
 import PrimaryNav from "./primary-nav";
@@ -16,6 +17,7 @@ export function SiteHeader() {
           <span className={styles.affiliation}>NDHU CSIE</span>
         </div>
         <PrimaryNav />
+        <AtmosphereControls />
       </div>
     </header>
   );
