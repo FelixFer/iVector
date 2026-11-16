@@ -56,7 +56,8 @@
   text-decoration: none;
 }
 
-.desktopNav a:hover, .mobileNav nav a:hover { text-decoration: underline; }
+.desktopNav a:focus-visible, .mobileNav nav a:focus-visible, .desktopNav a:active, .mobileNav nav a:active { text-decoration: underline; }
+@media (hover: hover) and (pointer: fine) { .desktopNav a:hover, .mobileNav nav a:hover { text-decoration: underline; } }
 .desktopNav a[aria-current="page"], .mobileNav nav a[aria-current="page"] { background: var(--color-green); }
 .desktopNav .labLink, .mobileNav nav .labLink { background: var(--color-blue); color: var(--color-link); }
 

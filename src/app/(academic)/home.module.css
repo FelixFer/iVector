@@ -60,12 +60,12 @@
   text-decoration: none;
 }
 
-.directory a { padding-inline: 0.65rem; transition: background-color 140ms, color 140ms, box-shadow 140ms; }
+.directory a { padding-inline: 0.65rem; transition: background-color var(--motion-color-duration) ease-out, color var(--motion-color-duration) ease-out, box-shadow var(--motion-color-duration) ease-out; }
 .directory a:focus-visible { background: var(--color-blue); box-shadow: inset 2px 0 var(--color-link); color: var(--color-link); text-decoration: underline; }
 @media (hover: hover) and (pointer: fine) {
   .directory a:hover { background: var(--color-blue); box-shadow: inset 2px 0 var(--color-link); color: var(--color-link); text-decoration: underline; }
 }
-.directory a:active { background: var(--color-blue); }
+.directory a:active { background: var(--color-blue); transition-duration: 0s; }
 .directory svg { flex: none; color: var(--color-link); }
 
 @media (min-width: 48rem) {
@@ -77,7 +77,7 @@
 }
 
 .illustration { position: relative; }
-.directory svg { transition: transform 140ms; }
+.directory svg { transition: transform 160ms ease-out; }
 html[data-motion-paused="false"] .directory a:focus-visible svg { transform: translateX(1px); }
 @media (hover: hover) and (pointer: fine) {
   html[data-motion-paused="false"] .directory a:hover svg { transform: translateX(1px); }

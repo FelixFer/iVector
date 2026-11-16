@@ -53,6 +53,15 @@ Potential enhancements after the initial release:
 
 Prioritize correctness, responsive behavior, content integrity, and core navigation before decorative effects or advanced interactions.
 
+## Planned motion refinement
+
+See [MOTION_PLAN.md](MOTION_PLAN.md) for the source audit and per-effect specifications. These priorities are within the motion pass, distinct from earlier project milestones.
+
+- [x] P0: accessibility, reduced motion, immediate focus/selected/pressed states, cancellation and movement/dialogue regressions; suppress palette interpolation during theme commits.
+- [x] P1: consistent 180 ms hover timing, arrows, interactive rows, portraits, guides, and four-unit/four-second consumed cloud lifecycle; retain existing heading/room effects.
+- [x] P2: independent Home About-section settle and 160 ms dialogue opening shell/backdrop treatment. No cloud lock or exit animation; immediate native dismissal/fallbacks.
+- [x] Verify Day/Night, reduced motion, no JS, responsive layouts, motion recordings, and targeted browser/performance checks.
+
 ## P1 cozy interaction pass
 
 - Automatic system reduced-motion preference, Home cloud, control transitions and monitor/guide feedback.

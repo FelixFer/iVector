@@ -1,4 +1,5 @@
 import { recordHref } from "@/data/records";
+import { SupportingEntrance } from "@/components/supporting-entrance";
 import { WorkspaceAmbience } from "@/components/motion";
 import { WorkspaceArt } from "@/components/workspace-art";
 import Link from "next/link";
@@ -58,11 +59,11 @@ export default async function HomePage() {
         </section>
       )}
       {about.introduction && (
-        <section className={`container ${styles.section}`}>
+        <SupportingEntrance><section id="about-the-lab" className={`container ${styles.section}`}>
           <h2>About the lab</h2>
           <p>{about.introduction}</p>
           <Link href="/about/">About iVector Lab</Link>
-        </section>
+        </section></SupportingEntrance>
       )}
 
       <section className={styles.explore}>

@@ -41,6 +41,7 @@ See [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md).
 | [`docs/PROJECT_OVERVIEW.md`](docs/PROJECT_OVERVIEW.md) | Product context and goals |
 | [`docs/SITE_STRUCTURE.md`](docs/SITE_STRUCTURE.md) | Sitemap, navigation, and page sections |
 | [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md) | Visual identity and UI rules |
+| [`docs/MOTION_PLAN.md`](docs/MOTION_PLAN.md) | Audited micro-interactions, animation priorities, and acceptance checks |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Application structure and data flow |
 | [`docs/COMPONENTS.md`](docs/COMPONENTS.md) | Reusable component specifications |
 | [`docs/CONTENT_GUIDELINES.md`](docs/CONTENT_GUIDELINES.md) | Academic content accuracy rules |

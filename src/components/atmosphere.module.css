@@ -7,7 +7,7 @@
 .switch[aria-checked="true"] { background: var(--color-lavender) !important; }
 .switch[aria-checked="true"] .thumb { transform: translateX(30px); }
 .picker { width: 44px; font: 700 1.25rem var(--font-sans); }
-.controls button:active { box-shadow: inset 0 2px var(--color-link); }
+.controls button:active { box-shadow: inset 0 2px var(--color-link); transition-duration: 0s; }
 .panel { position: absolute; inset: 54px 0 auto auto; margin: 0; width: min(260px, calc(100vw - 2.25rem)); padding: .75rem; border: 2px solid var(--color-link); background: var(--color-paper); color: var(--color-text); font: .875rem / 1.5 var(--font-sans); }
 .panel:popover-open { position: fixed; inset: auto; margin: 0; overflow-y: auto; }
 .panel fieldset { margin: 0; padding: 0; border: 0; }
@@ -15,6 +15,9 @@
 .panel label { display: flex; gap: .65rem; align-items: center; min-height: 44px; cursor: pointer; padding: .25rem .5rem; }
 .panel input { accent-color: var(--color-link); }
 .panel label:has(:checked) { background: var(--color-blue); }
+.controls button, .panel label { transition: background-color var(--motion-color-duration) ease-out, border-color var(--motion-color-duration) ease-out, color var(--motion-color-duration) ease-out; }
+.panel label:has(:checked), .panel label:active, .switch[aria-checked] { transition-duration: 0s; }
+.picker:focus-visible, .panel label:focus-within { background: var(--color-blue); }
 .panel p { margin-top: .5rem; color: var(--color-muted); }
 @media (hover: hover) and (pointer: fine) { .picker:hover, .panel label:hover { background: var(--color-blue); } }
 

@@ -4,6 +4,8 @@
 
 Verify that the website works correctly, follows the design system, remains responsive, and does not publish fabricated information.
 
+For the motion refinement in progress, follow the [per-effect animation specification and acceptance checks](MOTION_PLAN.md). Test finite automatic motion, hover/focus/touch parity, live reduced-motion changes, no replay, immediate native dialogue semantics, and performance recordings in addition to still screenshots. Integrated checks for the current pass are pending; earlier pass results below describe earlier builds.
+
 ## 2. Functional Tests
 
 ### Navigation
@@ -150,3 +152,17 @@ Production build and TypeScript passed; full browser suite passed 56 tests. Head
 Lint, TypeScript and production export pass. Final suite passes 59 tests. Night axe checks cover all seven routes plus 404 at 320/1280; computed semantic contrast checks require 4.5:1 for text/link/button pairs and 3:1 for control boundaries. Pre-body theme detection verifies saved Night is applied before hydration. Picker bounds are checked against its button at 320, 767, 768, 896, 1152, 1280 and 1920 px; scrolling away dismisses it. Existing movement timing test now waits for browser visibility initialization before synthetic input.
 
 Anti-Slop delivery gate PASS: Hard (axe, overflow and measured contrast); Purpose (separate surface/button/art tokens and anchored picker); Liveliness (warm charcoal identity, restrained existing motion, native pixel icon); Craft (59 tests, production build and rendered desktop/mobile dark review). No deployment or physical-device testing.
+
+## Revised motion acceptance (verification pending)
+
+Replace the old tests/motion.spec.ts 16-second duration check. Assert four SVG-coordinate-unit travel over a single four-second steps(4, end) run, visible start/final positions, animationend completion, and consumption on viewport exit, hidden tab, Night, or live reduced motion. Initial reduced motion must consume without playing; returning/re-enabling motion must not restart until a fresh Home mount. Test About entrance independently of cloud state and skip for focus/fragment access. Dialogue opening may decorate only the shell/backdrop; text/buttons remain stationary and Close/Escape/focus restoration stay immediate.
+
+Test the temporary palette-change flag for Manual, Automatic and cross-tab changes, rapid updates, and subsequent restored hover transitions. Selected/active/pressed states and focus indicators remain immediate. Review both themes, reduced motion, no JS, recordings and performance traces. No verification outcome for this pass is claimed here.
+
+## Cozy motion refinement verification
+
+Lint, TypeScript and production export passed. Full browser suite passed 67 tests. Assertions cover exact four-second/four-SVG-unit completion, visible final cloud bounds, cancellation/no restart for offscreen/hidden/Night/reduced motion, independent About entrance and direct anchors, immediate palette commits with restored 180 ms hover timing, and existing native dialogue/movement behavior. Day/Night, no-JavaScript, reduced motion, keyboard/touch and responsive checks remain in the suite.
+
+Desktop/mobile WebM recordings, screenshots, Playwright traces and Chrome performance traces are in test-results/motion-refinement-motion-r-59ebe-mobile-interaction-evidence/. Performance captures cover load, cloud, scrolling and movement: 39/40 layout events overall, maximum 36.65/26.61 ms at desktop/mobile; only two layout events in the +1 to +3 second cloud interval, rather than per-frame layout. This is a local trace review, not a cross-device performance guarantee.
+
+Anti-Slop delivery gate PASS: Hard (accessibility/contrast/overflow/regression tests), Purpose (shared feedback and bounded independent effects), Liveliness (cozy pixel sequences retained, stationary reading/buttons), Craft (67 tests, rendered video-frame review and trace inspection). No deployment or physical-device testing.

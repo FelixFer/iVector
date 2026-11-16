@@ -1,0 +1,3 @@
+.entrance[data-about-motion="running"] { animation: settle 220ms cubic-bezier(.16, 1, .3, 1); }
+@keyframes settle { from { transform: translateY(2px); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .entrance { animation: none !important; } }

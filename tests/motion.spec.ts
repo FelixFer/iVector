@@ -37,17 +37,24 @@ test("invalid saved position and blocked storage fall back safely", async ({ pag
   await expect(page.locator("html")).toHaveAttribute("data-motion-paused", "false");
 });
 
-test("cloud motion pauses offscreen and on hidden tabs", async ({ page }) => {
+test("cloud completes one four-unit SVG drift and stays visibly parked", async ({ page }) => {
   await page.goto("/");
   const cloud = page.locator(".workspace-ambience");
-  await expect(cloud).toHaveAttribute("data-active", "true");
-  await expect(cloud.locator(".pixel-cloud")).toHaveCSS("animation-duration", "16s");
+  const sprite = cloud.locator(".pixel-cloud");
+  await expect(cloud).toHaveAttribute("data-cloud-state", "running");
+  await expect(sprite).toHaveCSS("animation-duration", "4s");
+  await expect(sprite).toHaveCSS("animation-timing-function", "steps(4)");
+  await expect(sprite).toHaveCSS("animation-iteration-count", "1");
+  expect(await sprite.evaluate((node: SVGGraphicsElement) => ({ x: node.getBBox().x, width: node.getBBox().width }))).toEqual({ x: 77, width: 7 });
+  await expect(cloud).toHaveAttribute("data-cloud-state", "settled", { timeout: 6000 });
+  await expect(sprite).toHaveCSS("transform", "matrix(1, 0, 0, 1, 4, 0)");
+  // Final bounds 81..88 remain within the window's 76..89 left pane.
+  expect(await sprite.evaluate((node: SVGGraphicsElement) => node.getBBox().x + new DOMMatrix(getComputedStyle(node).transform).m41 + node.getBBox().width)).toBe(88);
   await page.getByRole("contentinfo").scrollIntoViewIfNeeded();
-  await expect(cloud).toHaveAttribute("data-active", "false");
   await cloud.scrollIntoViewIfNeeded();
-  await expect(cloud).toHaveAttribute("data-active", "true");
-  await page.evaluate(() => { Object.defineProperty(document, "hidden", { configurable: true, value: true }); document.dispatchEvent(new Event("visibilitychange")); });
-  await expect(cloud).toHaveAttribute("data-active", "false");
+  await expect(cloud).toHaveAttribute("data-cloud-state", "settled");
+  await page.reload();
+  await expect(cloud).toHaveAttribute("data-cloud-state", "running");
 });
 
 test("unavailable session storage keeps movement and entrance reset usable", async ({ page }) => {

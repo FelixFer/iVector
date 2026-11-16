@@ -157,6 +157,8 @@ News & Events must not appear in navigation, footer, homepage, or sitemap.
 - Use consistent navigation, footer, spacing, typography, and interaction states.
 - Prioritize readable content and clear hierarchy.
 - Keep the standard pages relatively restrained; the Virtual Lab may be more visually playful.
+- Treat subtle animation and micro-interactions as explicit UX requirements. Follow the [audited motion plan](MOTION_PLAN.md): document target, trigger, effect, duration/easing, accessibility, performance impact, and P0/P1/P2 priority before implementing an effect. Preserve useful existing motion and avoid duplicate effects.
+- New hover color/border transitions should use 150–250 ms, with immediate focus indicators and equivalent keyboard/touch usability. Nonessential motion respects reduced motion; content and navigation must never wait for animation.
 
 ## 8. Non-Functional Requirements
 

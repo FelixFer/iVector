@@ -4,6 +4,10 @@ Significant project changes are recorded here. Keep entries concise and date the
 
 ## Unreleased
 
+- 2026-11-16: Revised cozy motion specifications for immediate palette commits, P1 hover/cloud refinement, independent About entrance, and entrance-only dialogue treatment. Runtime integration and verification for this pass are pending.
+
+- 2026-11-16: Documented the source-audited micro-interaction inventory and P0/P1/P2 motion plan, including timings, accessibility, performance, and acceptance checks. That entry documented the pre-refinement baseline.
+
 - Removed visible development and approval notices, added plain directory empty states, simplified About and Virtual Lab copy, and documented priorities for verified content.
 
 - Prevented guide conversations through walls across keyboard, click, and touch interaction; doorway openings still permit conversations.

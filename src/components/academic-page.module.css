@@ -49,7 +49,7 @@
 
 .heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.65rem; }
 .heading h1 { min-width: 0; }
-.portrait { transition: background-color 140ms; }
+.portrait { transition: background-color var(--motion-color-duration) ease-out; }
 .person:focus-within .portrait { outline: 2px solid var(--color-link); outline-offset: 3px; background: var(--color-green); }
 .resources a:focus-visible, .email:focus-visible { color: var(--color-link-hover); text-decoration-thickness: 2px; text-underline-offset: 4px; }
 @media (hover: hover) and (pointer: fine) {
@@ -57,7 +57,13 @@
   .resources a:hover, .email:hover { color: var(--color-link-hover); text-decoration-thickness: 2px; text-underline-offset: 4px; }
   html[data-motion-paused="false"] .actions a:hover .arrow { transform: translateX(1px); }
 }
-.arrow { display: inline-block; margin-left: .5rem; }
+.arrow { display: inline-block; margin-left: .5rem; transition: transform 160ms ease-out; }
 html[data-motion-paused="false"] .actions a:focus-visible .arrow { transform: translateX(1px); }
 @media (prefers-reduced-motion: reduce) { .portrait { transition: none; } .arrow { transform: none !important; } }
 @media (max-width: 479px) { .heading { align-items: start; flex-direction: column; gap: .75rem; } }
+
+.rows > li:has(a, button) { transition: background-color var(--motion-color-duration) ease-out, border-color var(--motion-color-duration) ease-out; }
+.rows > li:has(a, button):focus-within { background: var(--color-surface); border-bottom-color: var(--color-link); }
+@media (hover: hover) and (pointer: fine) {
+  .rows > li:has(a, button):hover { background: var(--color-surface); border-bottom-color: var(--color-link); }
+}

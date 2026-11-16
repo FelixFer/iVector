@@ -32,7 +32,15 @@ export function AtmosphereProvider({ children }: { children: ReactNode }) {
     return () => { if (timer) clearInterval(timer); document.removeEventListener("visibilitychange", update); };
   }, [preference.mode]);
   const lighting = preference.mode === "manual" ? preference.lighting : automatic;
-  useEffect(() => { if (ready) document.documentElement.dataset.atmosphere = lighting; }, [lighting, ready]);
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+    if (!ready || root.dataset.atmosphere === lighting) return;
+    root.dataset.themeChanging = "true";
+    root.dataset.atmosphere = lighting;
+    let painted = 0;
+    const frame = requestAnimationFrame(() => { painted = requestAnimationFrame(() => { delete root.dataset.themeChanging; }); });
+    return () => { cancelAnimationFrame(frame); cancelAnimationFrame(painted); delete root.dataset.themeChanging; };
+  }, [lighting, ready]);
   function choose(value: AtmospherePreference) {
     if (value.mode === "automatic") setAutomatic(taiwanLighting(new Date()));
     setPreference(value);
@@ -40,6 +48,8 @@ export function AtmosphereProvider({ children }: { children: ReactNode }) {
   }
   return <Atmosphere.Provider value={{ ready, preference, lighting, choose }}>{children}</Atmosphere.Provider>;
 }
+
+export function useAtmosphere() { return useContext(Atmosphere); }
 
 export function AtmosphereControls() {
   const { ready, preference, lighting, choose } = useContext(Atmosphere);

@@ -7,7 +7,7 @@
 .filters p { align-self: center; color: var(--color-muted); font-size: .875rem; }
 .filters button:disabled { opacity: .6; cursor: default; }
 .empty { margin-bottom: 1rem; }
-.filters select { transition: border-color 140ms; }
+.filters select { transition: border-color var(--motion-color-duration) ease-out; }
 .filters select:focus-visible { border-color: var(--color-link); }
 @media (hover: hover) and (pointer: fine) { .filters select:hover { border-color: var(--color-link); } }
 @media (prefers-reduced-motion: reduce) { .filters select { transition: none; } }

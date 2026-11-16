@@ -87,6 +87,8 @@ Use the existing project's spacing scale if one exists. Otherwise define a small
 - Avoid continuous motion that distracts from content.
 - Respect `prefers-reduced-motion`.
 - Virtual Lab animations should be subtle and nonessential to navigation.
+- The repository-relative specification `docs/MOTION_PLAN.md` defines this motion refinement: P0 protects usability/regressions, P1 standardizes control color/border feedback to 180 ms (within 150–250 ms), and P2 adds two independent entrances. The pre-refinement 140 ms values below are historical baseline timings; integrated verification for the new pass is recorded separately. Focus outlines, selected/pressed/active states, essential movement, and theme changes stay immediate.
+- Preserve existing pixel sequences rather than adding duplicate effects. Home About entrance and dialogue opening shell/backdrop motion are independent P2 enhancements with static/immediate fallbacks; citations and reading rows stay stationary. Dialogue closing is immediate with no exit animation.
 
 ## 9. Responsive Rules
 
@@ -99,7 +101,7 @@ Use the existing project's spacing scale if one exists. Otherwise define a small
 
 ### Playable scene
 
-Keep the scene as the focal point. Blue identifies the visitor; muted blue, green, brown, and lavender clothing distinguish fictional room guides. Sprites use the scene's pixel scale. Walking animation runs only during input and is disabled with reduced motion. Dialogue uses existing ivory surfaces and typography, with immediate text and no entrance animation.
+Keep the scene as the focal point. Blue identifies the visitor; muted blue, green, brown, and lavender clothing distinguish fictional room guides. Sprites use the scene's pixel scale. Walking animation runs only during input and is disabled with reduced motion. Dialogue uses theme-aware surfaces with immediate text/native focus. The refinement permits only a 160 ms opening decorative-shell settle/backdrop fade; buttons stay stationary and closing remains immediate.
 
 Design read: ENERGY 2 / RHYTHM 2 / MOTION 1. Movement serves exploration; the scene carries the visual identity while instructions, controls, and destination links remain plain.
 
@@ -118,9 +120,9 @@ Room-name signs use Plus Jakarta Sans at a minimum 12 px with pastel surfaces, r
 
 ## P1 cozy motion
 
-Home uses one 16-second pixel cloud, clipped inside the window. Shared controls use 140 ms color/border transitions; Home arrows shift 1 px. Research and Projects monitors wake for 400 ms on room entry. Nearby visible guides face the visitor and greet once per visit for 400 ms. Text and dialogue stay stationary.
+Pre-refinement baseline: Home used a repeating 16-second cloud and controls used 140 ms transitions. The new target is one four-second cloud traversal across four SVG units and 180 ms control colors/borders; Home arrows still shift only 1 px. Research and Projects monitors wake for 400 ms on room entry. Nearby visible guides face the visitor and greet once per visit for 400 ms. Text and dialogue stay stationary.
 
-Animation controls are automatic: system reduced motion suppresses cosmetic motion. There is no manual pause button or stored manual preference. Start still before reading preferences. Ambient motion pauses offscreen/when hidden. Cosmetic pauses do not disable user-controlled character movement.
+Animation controls are automatic: system reduced motion suppresses cosmetic motion. There is no manual pause button or stored manual preference. Start still before reading preferences. The finite cloud cancels and parks visibly when offscreen/hidden, on Night selection, or reduced motion; it stays consumed until a fresh Home mount. Other retained effects keep their existing suppression behavior. Cosmetic pauses do not disable user-controlled character movement.
 
 Walking legs reflect actual displacement rather than held input. Blocked nearby guides show doorway guidance. Same-tab session position/facing are restored only if valid against current collision geometry. Return to entrance resets position and focus without scrolling.
 
@@ -145,3 +147,7 @@ Below 480 px, branding takes the first row; navigation/return and atmosphere occ
 Night now themes every page and 404, superseding artwork-only scope. Background/paper/surface: #252724/#30332E/#2B2E29; text/muted: #EEE9DC/#B8BCB1; links/hover: #A9C9DD/#C3DBEA. Muted blue/sage/lavender/peach containers retain the cozy identity. Filled buttons use separate on-accent ink #202A30; control borders #87917F remain stronger than decorative dividers #61675D. Scene labels/prompts/focus use independent ink/paper tokens over the lit artwork; Home frame remains charcoal. color-scheme follows the selected theme.
 
 Picker uses an original inline pixel palette icon with an Automatic clock indicator. Label is Automatic only. Native popover is positioned from trigger bounds, 8 px below with aligned right edges, viewport clamping and limited height; it follows scrolling/resizing and closes when the trigger leaves view.
+
+### Revised motion lifecycle and theme commits
+
+The cloud starts only when the Day illustration is visible/foreground and motion preference is known. It begins inside the window, moves exactly four SVG units in four seconds with steps(4, end), and parks visibly on animationend or cancellation. Initial reduced motion consumes it without playback; returning or disabling reduced motion never restarts it. Home About eligibility is independent of the cloud and has no global animation lock. Before any palette commit, a transient root flag zeros color/background/border/shadow-color transition durations through the next painted palette, then restores normal hover timing; transform timing remains separate.
