@@ -67,4 +67,6 @@ Book access refinement replaces the scene lamp and separate launcher with one ti
 
 ## Workbench results refinement
 
+Polished the puzzle modal with a compact sage chassis, continuous two-tone cables, pixel lamp header, and grouped standings/results. Mobile wins bring nickname and replay actions above the locked board. Removed duplicate completion copy and corrected loading, verification and posting feedback. Submission highlights the player by run ID and focuses the visible standings.
+
 Board terminals show fixed START battery and END lamp contacts, placed using the source/sink connector bits through weekly rotations. A framed desktop workbench puts the public Top 5 on the right. Phones use Game and Top 5 tabs that preserve the round. The winning move locks input immediately and focuses the result. The finish service projects the verified run into the daily personal-best ranking before offering a nickname. Submission rechecks qualification under a daily transaction lock; displaced candidates keep their result and receive refreshed standings. Failed verification preserves the solution and offers Retry verification. Existing records need no migration.
