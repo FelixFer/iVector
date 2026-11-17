@@ -239,3 +239,7 @@ Full-site Day/Night mode applies to all seven pages and 404, preserving Manual D
 The owner requested a same-site protected `/dashboard/` backed by Neon's Free tier. One iVector account edits Home/About copy, Research, Projects, People, and Publications, including supplied photographs and explicit relationships. Global identity, SEO configuration, navigation, guides, artwork, motion, and game geometry remain in code. No public visitor accounts or page builder are added.
 
 Managed authentication and immutable account-ID authorization protect every backend operation. Drafts and published versions/order remain separate. Preserve existing public types/anchors and the seven-page static export. Publishing updates CMS data; private builds and a separate deployment publish that data to visitors. Public CI uses local approved records without CMS credentials or draft artifacts. Requirements and acceptance details are in CMS_HANDOFF.md.
+
+## Light the Lab
+
+Approved extension: a daily 4 × 4 cable puzzle in a native modal on /virtual-lab/, launched by the glowing Projects desk lamp or labeled button. Includes public daily personal-best Top 5 and authorized staff score hiding. See GAME.md for rules, anonymous identity limitations, API and activation.

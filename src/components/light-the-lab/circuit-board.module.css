@@ -1,0 +1,151 @@
+.chassis {
+  --case: #d4dece;
+  --case-edge: #63766a;
+  --case-light: #edf1e2;
+  --tile: #f2f2e8;
+  --tile-hover: #e0eada;
+  --tile-lit: #f8e7bb;
+  --socket-border: #829284;
+  --socket-light: #fffdf2;
+  --socket-shadow: #d2d8c9;
+  --cable-edge: #40564c;
+  --cable-core: #97ad9c;
+  --live-edge: #79501f;
+  --live-core: #dea14c;
+  --live-stripe: #ffe39a;
+  position: relative;
+  width: min(100%, 410px);
+  margin-inline: auto;
+  padding: 43px clamp(36px, calc((100% - 182px) / 2), 43px);
+  border: 2px solid var(--case-edge);
+  background: var(--case);
+  box-shadow: inset 0 2px var(--case-light), inset 0 -2px #0002;
+}
+
+:global(html[data-atmosphere="night"]) .chassis {
+  --case: #3f5146;
+  --case-edge: #9aaa96;
+  --case-light: #708371;
+  --tile: #38423b;
+  --tile-hover: #45574b;
+  --tile-lit: #57503a;
+  --socket-border: #849286;
+  --socket-light: #546057;
+  --socket-shadow: #2b352e;
+  --cable-edge: #bfcbbb;
+  --cable-core: #63796b;
+  --live-edge: #efbb6c;
+  --live-core: #99662e;
+}
+
+.chassis::before,
+.chassis::after {
+  content: "";
+  position: absolute;
+  inset-inline: 7px;
+  height: 4px;
+  border-inline: 4px solid var(--case-edge);
+  pointer-events: none;
+}
+
+.chassis::before { top: 7px; }
+.chassis::after { bottom: 7px; }
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(44px, 1fr));
+  outline: 2px solid var(--case-edge);
+  box-shadow: 0 0 0 4px var(--case-light);
+}
+
+.socket { position: relative; }
+
+.tile {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  aspect-ratio: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  appearance: none;
+  background: var(--tile);
+  box-shadow: inset 0 0 0 1px var(--socket-border), inset 3px 3px var(--socket-light), inset -3px -3px var(--socket-shadow);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.tile[data-powered="true"] {
+  --cable-edge: var(--live-edge);
+  --cable-core: var(--live-core);
+  background: var(--tile-lit);
+}
+
+.tile:disabled { opacity: 1; cursor: default; }
+
+.tile:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 3px solid var(--color-link);
+  outline-offset: -4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tile:not(:disabled):hover {
+    box-shadow: inset 0 0 0 2px var(--case-edge), inset 4px 4px var(--socket-light), inset -4px -4px var(--socket-shadow);
+  }
+  .tile[data-powered="false"]:not(:disabled):hover { background: var(--tile-hover); }
+}
+
+.tile:not(:disabled):active { box-shadow: inset 0 0 0 2px var(--case-edge), inset 3px 3px var(--socket-shadow); }
+.tile svg { display: block; width: 100%; height: auto; }
+.sheath, .wire, .stripe { fill: none; }
+.sheath { stroke: var(--cable-edge); stroke-width: 5; }
+.wire { stroke: var(--cable-core); stroke-width: 2; }
+.stripe { stroke: var(--live-stripe); stroke-width: 1.25; stroke-dasharray: 2 2; }
+
+.terminal {
+  --lead: var(--cable-edge);
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 31px;
+  height: 33px;
+  background: #e7eadd;
+  color: #30493c;
+  box-shadow: inset 0 0 0 1px #778779;
+  pointer-events: none;
+}
+
+.terminal[data-connected="true"] {
+  --lead: var(--live-edge);
+  color: #563811;
+  background: #f6dfaa;
+  box-shadow: inset 0 0 0 1px #967444;
+}
+
+.terminal svg { width: 22px; height: 19px; }
+.terminal strong { font: 800 10px/1.1 var(--font-sans); }
+
+.terminal::after {
+  content: "";
+  position: absolute;
+  background: var(--lead);
+}
+
+.terminal[data-side="1"], .terminal[data-side="4"] { left: 50%; translate: -50% 0; }
+.terminal[data-side="1"] { bottom: calc(100% + 4px); flex-direction: column-reverse; }
+.terminal[data-side="4"] { top: calc(100% + 4px); }
+.terminal[data-side="1"]::after, .terminal[data-side="4"]::after { left: calc(50% - 2px); width: 4px; height: 4px; }
+.terminal[data-side="1"]::after { top: 100%; }
+.terminal[data-side="4"]::after { bottom: 100%; }
+.terminal[data-side="8"], .terminal[data-side="2"] { top: 50%; translate: 0 -50%; }
+.terminal[data-side="8"] { right: calc(100% + 4px); }
+.terminal[data-side="2"] { left: calc(100% + 4px); }
+.terminal[data-side="8"]::after, .terminal[data-side="2"]::after { top: calc(50% - 2px); width: 4px; height: 4px; }
+.terminal[data-side="8"]::after { left: 100%; }
+.terminal[data-side="2"]::after { right: 100%; }

@@ -88,3 +88,7 @@ Five decorative heading accents, Home cloud phase and door gesture, member portr
 - Private published-content builds with local images; public CI remains on approved local data.
 - Local content/media backup and isolated empty-target restoration tooling.
 - Account activation, live permission/recovery checks, and a real restore rehearsal require secure owner sign-in. Public deployment, multiple staff roles, automatic publishing, and analytics remain deferred.
+
+## Light the Lab
+
+Approved extension: a daily 4 × 4 cable puzzle in a native modal on /virtual-lab/, launched by the glowing Projects desk lamp or labeled button. Includes public daily personal-best Top 5 and authorized staff score hiding. See GAME.md for rules, anonymous identity limitations, API and activation.

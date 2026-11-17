@@ -151,3 +151,7 @@ Picker uses an original inline pixel palette icon with an Automatic clock indica
 ### Revised motion lifecycle and theme commits
 
 The cloud starts only when the Day illustration is visible/foreground and motion preference is known. It begins inside the window, moves exactly four SVG units in four seconds with steps(4, end), and parks visibly on animationend or cancellation. Initial reduced motion consumes it without playback; returning or disabling reduced motion never restarts it. Home About eligibility is independent of the cloud and has no global animation lock. Before any palette commit, a transient root flag zeros color/background/border/shadow-color transition durations through the next painted palette, then restores normal hover timing; transform timing remains separate.
+
+### Light the Lab motion
+
+The desk halo is steady. Lamp completion uses one 180 ms two-step decorative shadow change, disabled by reduced motion. Puzzle text, controls, and focus stay immediate. Closing the native game dialog has no delayed animation. See GAME.md.

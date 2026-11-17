@@ -1,10 +1,11 @@
 "use client";
 
+import LightTheLab from "@/components/light-the-lab/game";
 import { LabMapArt } from "@/components/lab-map-art";
 import { useSceneMotion } from "@/components/motion";
 import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import { canStand, guideNear, guides, hasLineOfSight, move, roomAt, spawn, vectors, type Direction, type Guide } from "./scene-data";
+import { canOpenBook, canStand, guideNear, guides, hasLineOfSight, move, roomAt, spawn, vectors, type Direction, type Guide } from "./scene-data";
 import styles from "./virtual-lab.module.css";
 
 const keys: Record<string, Direction> = {
@@ -30,6 +31,7 @@ export default function Playable() {
   const [walking, setWalking] = useState(false);
   const [guide, setGuide] = useState<Guide | null>(null);
   const held = useRef(new Map<string, Direction>());
+  const game = useRef<{ open: (control: HTMLElement) => void }>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const { ref: scene, active, visible, foreground } = useSceneMotion();
   const currentPosition = useRef(spawn);
@@ -95,7 +97,7 @@ export default function Playable() {
       let x = 0, y = 0;
       held.current.forEach(direction => { x += vectors[direction].x; y += vectors[direction].y; });
       if (!activity.current.visible || !activity.current.foreground) held.current.clear();
-      const moving = (x !== 0 || y !== 0) && !dialog.current?.open && activity.current.visible && activity.current.foreground;
+      const moving = (x !== 0 || y !== 0) && !dialog.current?.open && !document.querySelector('dialog[open][aria-labelledby="game-title"]') && activity.current.visible && activity.current.foreground;
       if (!moving) setWalking(false);
       if (moving) {
         currentFacing.current = x ? x > 0 ? "right" : "left" : y > 0 ? "down" : "up";
@@ -119,8 +121,8 @@ export default function Playable() {
   }, []);
   return <>
     <p id="walk-instructions" className={styles.instructions}>
-      <span className={styles.keyboardPrompt}>Arrow keys / WASD to move. E or click a guide to talk.</span>
-      <span className={styles.touchPrompt}>Use the direction buttons to move. Tap a guide to talk.</span>
+      <span className={styles.keyboardPrompt}>Arrow keys / WASD to move. E or click a guide to talk. Walk to the Projects desk book to play Light the Lab.</span>
+      <span className={styles.touchPrompt}>Use the direction buttons to move. Tap a guide to talk. Walk to the Projects desk book to play Light the Lab.</span>
     </p>
     <div ref={scene} className={styles.scene} data-motion-active={active} role="group" tabIndex={ready ? 0 : undefined}
       aria-label="Walk around the lab" aria-describedby="walk-instructions"
@@ -129,11 +131,13 @@ export default function Playable() {
         if (event.target !== event.currentTarget || event.altKey || event.ctrlKey || event.metaKey) return;
         const key = event.key.toLowerCase();
         if (keys[key]) { event.preventDefault(); held.current.set(`key:${key}`, keys[key]); }
+        if (key === "e" && canOpenBook(position) && !event.repeat) { event.preventDefault(); game.current?.open(event.currentTarget); return; }
         if (key === "e" && nearby && !event.repeat) { event.preventDefault(); talk(nearby, event.currentTarget); }
       }}>
       <LabMapArt />
-      {ready && active && wake === room && <svg key={room} className={styles.monitorWake} viewBox="0 0 240 140" aria-hidden="true"><path fill="#fff7e9" d={room === "Research" ? "M36 26.8h11v4.8H36z" : "M150 27.6h11v4.8h-11zM186 27.6h11v4.8h-11z"} /></svg>}
-      {room !== "Central corridor" && <svg key={room} className={styles.roomOutline} data-animate={active} viewBox="0 0 240 140" aria-hidden="true"><rect x={room === "Research" || room === "People" ? 13 : 137} y={room === "Research" || room === "Projects" ? 10 : 82} width="90" height={room === "Research" || room === "Projects" ? 47 : 42} /></svg>}
+      {ready && <LightTheLab ref={game} reachable={canOpenBook(position)} inProjects={room === "Projects"} beforeOpen={stop} afterClose={stop} />}
+      {ready && active && wake === room && <svg key={`monitor-wake-${room}`} className={styles.monitorWake} viewBox="0 0 240 140" aria-hidden="true"><path fill="#fff7e9" d={room === "Research" ? "M36 26.8h11v4.8H36z" : "M150 27.6h11v4.8h-11zM186 27.6h11v4.8h-11z"} /></svg>}
+      {room !== "Central corridor" && <svg key={`room-outline-${room}`} className={styles.roomOutline} data-animate={active} viewBox="0 0 240 140" aria-hidden="true"><rect x={room === "Research" || room === "People" ? 13 : 137} y={room === "Research" || room === "Projects" ? 10 : 82} width="90" height={room === "Research" || room === "Projects" ? 47 : 42} /></svg>}
       {guides.map(g => <span key={g.href} className={`${styles.roomSign} ${styles[g.label.toLowerCase()]}`} data-room={g.label}
         style={{ left: `${g.sign.x / 2.4}%`, top: `${g.sign.y / 1.4}%` }}>{g.label}</span>)}
       {ready && <>

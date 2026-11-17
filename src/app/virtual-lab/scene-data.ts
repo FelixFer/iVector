@@ -83,3 +83,8 @@ export function hasLineOfSight(from: Point, to: Point): boolean {
     return true;
   });
 }
+
+export const gameBook: Point = { x: 219, y: 43 };
+export function canOpenBook(position: Point): boolean {
+  return Math.hypot(position.x - gameBook.x, position.y - gameBook.y) <= 12 && hasLineOfSight(position, gameBook);
+}

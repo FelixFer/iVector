@@ -58,3 +58,13 @@ Significant project changes are recorded here. Keep entries concise and date the
 - Move atmosphere control to every header; replace inline fieldsets with a pixel sun/moon switch and accessible picker. Adapt header rows and navigation breakpoint for mobile/tablet.
 
 - Add full-site warm charcoal Night theme, guarded pre-paint preference loading, button-anchored picker positioning and pixel palette icon. Shorten Automatic label.
+
+## Light the Lab game
+
+Added daily cable puzzle modal, discoverable desk lamp, keyboard/touch controls, unranked fallback, verified score API and staff score hiding. Game records use a separate restricted schema and Function. Public website deployment remains separate.
+
+Book access refinement replaces the scene lamp and separate launcher with one titled, glowing pixel book. Its button remains keyboard-focusable while out of reach and uses aria-disabled. The character must be within 12 units with line of sight before click, tap, Enter/Space or scene-focused E opens the modal. A two-cycle, 4-second, 2px float runs on first Projects entry, with static reduced-motion rendering. The permanent Light the Lab plate uses Pixelify Sans at 12px. Room effects use distinct role/room keys to avoid sibling identity collisions. Narrow screens shift the Projects sign slightly left to keep the book title clear.
+
+## Workbench results refinement
+
+Board terminals show fixed START battery and END lamp contacts, placed using the source/sink connector bits through weekly rotations. A framed desktop workbench puts the public Top 5 on the right. Phones use Game and Top 5 tabs that preserve the round. The winning move locks input immediately and focuses the result. The finish service projects the verified run into the daily personal-best ranking before offering a nickname. Submission rechecks qualification under a daily transaction lock; displaced candidates keep their result and receive refreshed standings. Failed verification preserves the solution and offers Retry verification. Existing records need no migration.

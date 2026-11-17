@@ -88,3 +88,6 @@ html:not([data-motion-paused="false"]) .legs { animation: none; }
 @media (max-width: 479px) { .headerInner { flex-wrap: wrap; padding-block: .5rem; gap: .5rem; } .headerInner > a:first-child { flex-basis: 100%; } .headerInner > a:nth-child(2) { margin-left: 0; margin-right: auto; } }
 
 .guide:focus-visible { outline-color: var(--scene-ink); }
+
+
+@media(max-width:480px){.roomSign[data-room="Projects"]{margin-left:-12px;}}

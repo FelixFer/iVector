@@ -105,3 +105,9 @@ Required integration checks (pending this pass):
 - Update the design system, test guidance, and changelog with what actually shipped. This specification is not evidence that the effects or checks have passed; record actual integrated results separately.
 
 Content, CMS activation, deployment, sound, and additional game systems remain outside this motion pass.
+
+### Light the Lab motion
+
+The desk halo is steady. Lamp completion uses one 180 ms two-step decorative shadow change, disabled by reduced motion. Puzzle text, controls, and focus stay immediate. Closing the native game dialog has no delayed animation. See GAME.md.
+
+Book access refinement replaces the scene lamp and separate launcher with one titled, glowing pixel book. Its button remains keyboard-focusable while out of reach and uses aria-disabled. The character must be within 12 units with line of sight before click, tap, Enter/Space or scene-focused E opens the modal. A two-cycle, 4-second, 2px float runs on first Projects entry, with static reduced-motion rendering. The permanent Light the Lab plate uses Pixelify Sans at 12px. Room effects use distinct role/room keys to avoid sibling identity collisions. Narrow screens shift the Projects sign slightly left to keep the book title clear.

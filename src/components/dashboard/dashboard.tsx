@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { CmsAsset, CmsEntry, CmsKind } from "../../../cms/model";
+import GameScores from "./game-scores";
 import Editor, { entryLabel, sectionLabels } from "./editor";
 import styles from "./dashboard.module.css";
 
@@ -208,6 +209,7 @@ export default function Dashboard() {
           setAuthenticated(false); setEntries([]); setAssets([]); setValue(null); setEditingId(null); setDirty(false); selectedOnce.current = false; setPassword(""); setMessage("Signed out.");
         });
       }}>Sign out</button></div>
+      <GameScores token={async () => { const session = await (await auth()).getSession(); const token = session.data?.session?.token; if (!token) throw new Error("Sign in again."); return token; }} />
       <nav className={styles.tabs} aria-label="Content sections">{(Object.entries(sectionLabels) as [CmsKind, string][]).map(([kind, label]) => <button key={kind} type="button" aria-current={section === kind ? "true" : undefined} disabled={busy} onClick={() => select(entries.find(entry => entry.kind === kind) ?? null, kind)}>{label}</button>)}</nav>
       <div className={styles.layout}>
         <aside className={styles.directory} aria-label={`${sectionLabels[section]} records`}>

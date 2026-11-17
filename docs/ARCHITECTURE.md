@@ -170,3 +170,7 @@ A shared atmosphere provider stores Manual/Automatic and the last manual Day/Nig
 The existing AtmosphereControls component now renders a header switch and native auto popover. SiteHeader covers academic routes/404; Virtual Lab mounts the same component in its separate header. Provider, preference format and Taiwan clock remain unchanged.
 
 Full-site theme uses the existing data-atmosphere attribute and v1 preference format. A guarded head initializer reads validated saved state before body paint; the provider waits until initialized before applying its state. No new storage key or service. Native picker position is calculated only while open.
+
+## Light the Lab
+
+Approved extension: a daily 4 × 4 cable puzzle in a native modal on /virtual-lab/, launched by the glowing Projects desk lamp or labeled button. Includes public daily personal-best Top 5 and authorized staff score hiding. See GAME.md for rules, anonymous identity limitations, API and activation.

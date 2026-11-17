@@ -64,7 +64,7 @@ for (const width of [320, 767, 768, 896, 1152, 1280]) {
       if (href === "/virtual-lab/") {
         const signs = page.locator("[data-room]");
         await expect(signs).toHaveCount(4);
-        await expect(page.getByRole("group", { name: "Walk around the lab" }).getByRole("button")).toHaveCount(4);
+        await expect(page.getByRole("group", { name: "Walk around the lab" }).getByRole("button", { name: /^Talk to .* Guide$/ })).toHaveCount(4);
         const buttons = await page.getByRole("group", { name: "Walk around the lab" }).getByRole("button").all();
         for (const sign of await signs.all()) {
           expect(await sign.evaluate(el => parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(12);
