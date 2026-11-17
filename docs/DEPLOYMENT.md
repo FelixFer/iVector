@@ -32,6 +32,8 @@ The current milestone delivers a local static preview. Select and confirm the pr
 
 Run `npm ci` and `npm run build`. Serve `out/` with directory indexes and use `404.html` for unknown paths. Run `npm run preview` to check that configuration locally.
 
+Normal builds and public GitHub checks use approved local records. For an approved CMS release, run the private `cms:check`, `cms:build`, and `cms:verify` commands from CMS_HANDOFF.md. Publish the resulting successful export separately. The dashboard ships at `/dashboard/` on the same host and needs its public Auth/API endpoints at build time; private database/storage credentials must never be configured as browser variables. Activating the Neon backend does not deploy the website.
+
 Before public release, configure the canonical origin and page URLs, then remove the preview-only robots restriction in the root layout. Rebuild and verify the production metadata.
 
 ## 5. Domain and HTTPS

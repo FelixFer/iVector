@@ -148,7 +148,11 @@ Use local component state for simple interactions such as mobile menu visibility
 
 ## Published content loading
 
-Academic pages call the server-side loadContent adapter at build time. It reads published Contentful CDA records when configured and validates them before rendering; with no CMS configuration it uses local approved records. The public export remains static. See CMS_HANDOFF.md for activation and credential boundaries.
+Academic pages call the server-side loadContent adapter at build time. Normal builds use approved local records. A private `cms:build` reads one repeatable-read snapshot from the restricted Neon published views, validates it, downloads only referenced images with checksum verification, and stages public-only content in ignored `.cms/snapshot.json` and `public/cms-assets/`. The Next build selects that snapshot explicitly with `CMS_CONTENT_SOURCE=neon`; invalid or unavailable CMS content fails instead of mixing in local records. The portable export includes its images and makes no visitor database requests.
+
+`/dashboard/` is an exported, non-indexable client editor. Its HTML contains no private CMS records. Neon managed authentication owns passwords and sessions. A single Neon Function verifies JWT signature/issuer and the approved immutable account ID before content or image operations. The runtime SQL login has only CMS data privileges; migrations use a separate local owner login. The unused Data API stays disabled. Draft and published fields/order are separate; revision checks prevent silent overwrites and transactional publication validates the resulting complete public dataset. Home/About must remain published, and references block removal of their targets.
+
+Images live in a private branch bucket. The authenticated Function validates raster uploads and supplies short-lived preview URLs. Build credentials stay local. Shared fields and public conversion live in `cms/model.ts`; the original academic data types and record anchors remain unchanged. See CMS_HANDOFF.md for activation, publishing and recovery.
 
 
 ## Page accents
@@ -159,7 +163,7 @@ AcademicPage accepts an optional typed accent variant. PageAccent and CopyEmail 
 
 DirectoryFilters is a client leaf around server-rendered records. Supplied facet metadata drives native selects; scoped native hidden states filter rows and empty groups. Controls mount after hydration; no-JavaScript records remain complete. Fragment navigation clears conflicting selections and reveals the record. Selection state stays in memory.
 
-A shared record helper validates IDs/relationships and resolves explicit one-hop forward/reverse links and encoding-safe anchors. relatedIds is optional across all four directory types; names and publication authors are never matched automatically. CMS updates append the missing optional field without replacing existing definitions or entries.
+A shared record helper validates IDs/relationships and resolves explicit one-hop forward/reverse links and encoding-safe anchors. relatedIds is optional across all four directory types; names and publication authors are never matched automatically. The dashboard uses record pickers; SQL migrations preserve existing draft and published data.
 
 A shared atmosphere provider stores Manual/Automatic and the last manual Day/Night choice. Runtime Taiwan time is used only for Automatic mode; hidden tabs suspend polling. Native SVG artwork keeps the original geometry and uses scoped palette variables. No new runtime services or dependencies.
 

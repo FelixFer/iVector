@@ -62,9 +62,9 @@ English is the sole launch language.
 ### 4.2 Out of Scope for Initial Release
 
 - News & Events page or feed.
-- User accounts, authentication, or user dashboards.
+- Public visitor accounts, authentication, or user dashboards. The approved staff CMS below is separate.
 - Payments or e-commerce.
-- Full content management system.
+- Page builders or unrestricted content/layout management. The approved academic editor below is separate.
 - Multiplayer game functionality.
 - RPG mechanics, quests, levels, points, or inventory.
 - Complex backend services unless a later requirement establishes a need.
@@ -208,7 +208,7 @@ The initial release is accepted when:
 ## 11. Future Enhancements
 
 Potential future work, not required for the initial release:
-- CMS integration.
+- CMS expansion beyond the approved academic editing scope.
 - Publication search and filtering.
 - Additional languages beyond the confirmed launch scope.
 - More advanced Virtual Lab interactions.
@@ -233,3 +233,9 @@ Records can carry optional relatedIds pointing to explicitly approved academic r
 Atmosphere defaults to Manual Day. Visitors can choose Day/Night or opt into Automatic (Asia/Taipei, Day 06:00–17:59). Persist explicit preferences; fallback to Manual Day for invalid/unavailable storage. Change decorative Home/Virtual Lab art only, instantly, preserving scene geometry and interaction.
 
 Full-site Day/Night mode applies to all seven pages and 404, preserving Manual Day default, saved choices and existing Automatic schedule. Picker must anchor to its trigger rather than the viewport edge; public label is Automatic.
+
+## Approved academic CMS requirements
+
+The owner requested a same-site protected `/dashboard/` backed by Neon's Free tier. One iVector account edits Home/About copy, Research, Projects, People, and Publications, including supplied photographs and explicit relationships. Global identity, SEO configuration, navigation, guides, artwork, motion, and game geometry remain in code. No public visitor accounts or page builder are added.
+
+Managed authentication and immutable account-ID authorization protect every backend operation. Drafts and published versions/order remain separate. Preserve existing public types/anchors and the seven-page static export. Publishing updates CMS data; private builds and a separate deployment publish that data to visitors. Public CI uses local approved records without CMS credentials or draft artifacts. Requirements and acceptance details are in CMS_HANDOFF.md.

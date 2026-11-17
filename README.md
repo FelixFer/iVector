@@ -83,5 +83,5 @@ Add approved records to `src/data/content.ts`. Public pages hide missing optiona
 
 ## Staff editing and private review
 
-See [CMS handoff](docs/CMS_HANDOFF.md) for Contentful activation, publishing, private build review, and recovery. Local records remain available without CMS credentials.
+The protected `/dashboard/` edits Home/About copy and the four academic directories through Neon. See [CMS handoff](docs/CMS_HANDOFF.md) for account activation, publishing, private review builds, and recovery. Normal builds and public GitHub checks use approved local records; CMS-backed exports are built privately. Public deployment remains separate.
 

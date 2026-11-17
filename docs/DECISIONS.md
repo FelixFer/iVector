@@ -2,6 +2,12 @@
 
 Record accepted decisions here. Add new entries with a date, context, decision, and consequences. Proposed decisions should be labelled as proposed until approved.
 
+## Neon academic CMS (2026-11-16)
+
+- Status: Accepted by the owner.
+- Decision: Replace the prepared Contentful integration with one Free Neon project and a protected `/dashboard/` in the existing static website. Use managed authentication, an immutable owner account ID, one authenticated Function, plain SQL, and private image storage. The account name is iVector; recovery uses the owner's supplied student email. The password is set privately.
+- Consequences: Drafts are distinct from published content. Only private local builds read published Neon records and bundle their approved images. Public GitHub CI uses approved local seeds without remote CMS credentials. Publishing is separate from deployment. Shared-account edits cannot identify individual staff. Quotas and short free restore history require private backups and an isolated restore rehearsal.
+
 ## D-001 — Seven-Page Information Architecture
 
 - **Status:** Accepted baseline

@@ -4,6 +4,8 @@ Significant project changes are recorded here. Keep entries concise and date the
 
 ## Unreleased
 
+- 2026-11-16: Replaced prepared Contentful integration with a protected same-site Neon academic dashboard, isolated drafts/publication, private image uploads, validated local CMS builds, and backup/restore tooling. Public CI uses approved local records only. Live service activation and recovery rehearsal require account access and are not claimed complete.
+
 - 2026-11-16: Revised cozy motion specifications for immediate palette commits, P1 hover/cloud refinement, independent About entrance, and entrance-only dialogue treatment. Runtime integration and verification for this pass are pending.
 
 - 2026-11-16: Documented the source-audited micro-interaction inventory and P0/P1/P2 motion plan, including timings, accessibility, performance, and acceptance checks. That entry documented the pre-refinement baseline.

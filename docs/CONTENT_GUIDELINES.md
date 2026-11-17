@@ -129,9 +129,15 @@ Populate content in the existing typed modules. Do not add filler sections to co
 | Publications | Chronological citations with verified author order, venue, year, and paper links. |
 | Virtual Lab | Brief navigation guidance and fictional website guides that point to the academic pages. |
 
-Current content gaps: Home introduction and About copy are empty; Research, Projects, People, and Publications contain no records. Verified lab identity is available, and Virtual Lab artwork is approved. Keep this status internal.
+Current content gaps: approved identity-based Home/About copy and five people exist. Research, Projects, and Publications have no verified records; member and environment photographs have not been supplied. Virtual Lab artwork is approved. Keep this status internal.
 
 First collect the Home focus sentence, research directions, and member identity. Then add project and publication records and expand About from approved material. Review Home selections after the directories are populated. Lab content sign-off and deployment remain separate from the copy cleanup.
+
+## Staff CMS publication
+
+The Neon dashboard edits only the approved academic scope. Use a verified source note for each published record; do not fill empty directories with examples. Keep publication authors in supplied order and select only explicit approved relationships. A saved draft is private and does not replace its published version. Publishing prepares content for a later static build and deployment.
+
+For People/About photographs, record descriptive provenance and permission, meaningful alt text, and an optional source URL. Owner-supplied photographs do not need a public source URL. Keep provenance and draft status inside the CMS; export only the public academic fields and referenced approved image files. Initial setup imports the already-approved Home/About and five people; future edits require the designated account's publication action.
 
 ## P0 member update
 

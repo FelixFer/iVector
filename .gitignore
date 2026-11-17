@@ -9,4 +9,7 @@ test-results/
 
 !.env.example
 backups/
+.cms/
+public/cms-assets/
 .agents/
+.neon

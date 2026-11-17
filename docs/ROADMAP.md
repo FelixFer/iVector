@@ -80,3 +80,11 @@ Five decorative heading accents, Home cloud phase and door gesture, member portr
 - Manual Day/Night default, optional Taiwan-time Automatic mode.
 - Restrained hover/focus/pressed feedback and unchanged scene geometry.
 - Search, scene content objects, live CMS activation and deployment remain deferred.
+
+## Neon academic CMS
+
+- Protected same-site dashboard for Home/About and the four academic directories.
+- Separate drafts/publication, friendly resource links, related-record pickers, image permissions, and revision conflicts.
+- Private published-content builds with local images; public CI remains on approved local data.
+- Local content/media backup and isolated empty-target restoration tooling.
+- Account activation, live permission/recovery checks, and a real restore rehearsal require secure owner sign-in. Public deployment, multiple staff roles, automatic publishing, and analytics remain deferred.

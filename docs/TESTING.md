@@ -166,3 +166,11 @@ Lint, TypeScript and production export passed. Full browser suite passed 67 test
 Desktop/mobile WebM recordings, screenshots, Playwright traces and Chrome performance traces are in test-results/motion-refinement-motion-r-59ebe-mobile-interaction-evidence/. Performance captures cover load, cloud, scrolling and movement: 39/40 layout events overall, maximum 36.65/26.61 ms at desktop/mobile; only two layout events in the +1 to +3 second cloud interval, rather than per-frame layout. This is a local trace review, not a cross-device performance guarantee.
 
 Anti-Slop delivery gate PASS: Hard (accessibility/contrast/overflow/regression tests), Purpose (shared feedback and bounded independent effects), Liveliness (cozy pixel sequences retained, stationary reading/buttons), Craft (67 tests, rendered video-frame review and trace inspection). No deployment or physical-device testing.
+
+## Neon CMS acceptance
+
+Run `npm run lint`, `npm run typecheck`, `npm run build`, and the full browser suite. Normal CI uses local approved records only. Test the dashboard shell without configuration, accessible form labels/focus and both themes at mobile/desktop widths. Exercise managed login, wrong credentials, logout, expired sessions and recovery with a securely activated test account; never hardcode real credentials or add a shipped test-login bypass.
+
+API tests cover missing/invalid/wrong-issuer tokens, unapproved user IDs, denied origins, malformed content, revision conflicts, draft/publication isolation, required Home/About, protected references/deletion, and raster upload metadata/limits. Publication tests use isolated fixtures and preserve current public types/anchors. Check that no private fields or configuration appear in public output.
+
+For live acceptance, use an isolated branch: create/edit/reorder records, exercise each content form and image upload, publish/unpublish, verify local private `cms:check`, `cms:build`, and `cms:verify`, then restore a private backup into a different empty test endpoint and compare content/media. Check the resulting export without Neon network access. Do not publish generated test academic records to the working branch. Keep authenticated screenshots/recordings private. Record actual results separately; live account activation and restore rehearsal are not implied by local passing tests.

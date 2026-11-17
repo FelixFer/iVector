@@ -1,0 +1,47 @@
+.page { padding-block: 2.5rem 4rem; }
+.heading { max-width: 48rem; margin-block-end: 2rem; }
+.heading p { margin-block-start: 0.75rem; color: var(--color-muted); }
+.login { max-width: 28rem; padding: 1.5rem; border: 1px solid var(--color-border); background: var(--color-paper); }
+.login h2 { margin-block-end: 1.25rem; }
+.form { display: grid; gap: 1.25rem; min-width: 0; }
+.field { display: grid; gap: 0.4rem; min-width: 0; font-size: 0.875rem; font-weight: 600; }
+.field small, .hint { color: var(--color-muted); font-size: 0.8125rem; font-weight: 400; }
+.field input, .field textarea, .field select { width: 100%; min-width: 0; min-height: 44px; padding: 0.65rem 0.7rem; border: 1px solid var(--color-control-border); border-radius: 0; color: var(--color-text); background: var(--color-paper); font: 400 1rem / 1.5 var(--font-sans); }
+.field textarea { min-height: 7rem; resize: vertical; }
+.field input[readonly] { background: var(--color-surface); }
+.field input[type="file"] { padding: 0.5rem; }
+.field input::file-selector-button { min-height: 32px; margin-inline-end: 0.5rem; padding: 0.3rem 0.6rem; border: 1px solid var(--color-control-border); background: var(--color-surface); color: var(--color-text); font: inherit; }
+.actions, .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.65rem; }
+.toolbar { justify-content: space-between; margin-block-end: 1.5rem; }
+.actions button, .toolbar button, .tabs button, .records button { cursor: pointer; font-family: var(--font-sans); }
+.actions button:disabled, .toolbar button:disabled { cursor: wait; opacity: 0.65; }
+.textButton { min-height: 44px; border: 0; padding: 0.5rem 0; background: transparent; color: var(--color-link); text-align: start; text-decoration: underline; text-underline-offset: 0.2em; font: inherit; cursor: pointer; }
+.textButton:disabled { color: var(--color-muted); cursor: not-allowed; text-decoration: none; }
+.status { margin-block: 0 1.25rem; padding: 0.75rem 1rem; border-inline-start: 3px solid var(--color-control-border); background: var(--color-surface); overflow-wrap: anywhere; }
+.tabs { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-block-end: 1.5rem; padding-block-end: 0.5rem; border-block-end: 1px solid var(--color-border); }
+.tabs button { min-height: 44px; border: 1px solid transparent; padding: 0.5rem 0.75rem; background: transparent; color: var(--color-link); font-size: 0.875rem; }
+.tabs button[aria-current="true"] { background: var(--color-green); border-color: var(--color-control-border); color: var(--color-text); font-weight: 700; }
+.layout { display: grid; grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr); gap: 2rem; align-items: start; }
+.directory { display: grid; gap: 1rem; min-width: 0; }
+.records { list-style: none; padding: 0; margin: 0; border-block-start: 1px solid var(--color-border); }
+.records li { border-block-end: 1px solid var(--color-border); }
+.records button { display: grid; gap: 0.25rem; width: 100%; min-height: 60px; padding: 0.75rem; border: 1px solid transparent; background: transparent; color: var(--color-text); font: inherit; text-align: start; overflow-wrap: anywhere; }
+.records button[aria-current="true"] { background: var(--color-blue); border-color: var(--color-control-border); }
+.records small { color: var(--color-muted); font-size: 0.75rem; }
+.editor { min-width: 0; max-width: 48rem; }
+.editorHeading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; margin-block-end: 1.25rem; }
+.fieldset { display: grid; gap: 1.25rem; min-width: 0; margin: 0; padding: 1.25rem; border: 1px solid var(--color-border); }
+.fieldset legend { padding-inline: 0.35rem; font-weight: 700; }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.choices { display: grid; gap: 0.25rem; max-height: 18rem; overflow-y: auto; }
+.choice { display: flex; align-items: center; gap: 0.7rem; min-height: 44px; padding: 0.4rem; font-size: 0.875rem; cursor: pointer; overflow-wrap: anywhere; }
+.choice input { flex: none; width: 18px; height: 18px; accent-color: var(--color-link); }
+.photo { display: flex; align-items: start; flex-wrap: wrap; gap: 1rem; }
+.photo img { width: 128px; height: 128px; object-fit: cover; border: 1px solid var(--color-border); }
+.linkRow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto; gap: 0.75rem; align-items: end; }
+.linkRow button { min-height: 44px; }
+.tabs button, .records button { transition: background-color var(--motion-color-duration) ease-out, border-color var(--motion-color-duration) ease-out; }
+.tabs button:active, .records button:active, .tabs button[aria-current="true"], .records button[aria-current="true"] { transition-duration: 0s; }
+.tabs button:focus-visible, .records button:focus-visible { background: var(--color-surface); }
+@media (hover: hover) and (pointer: fine) { .tabs button:hover, .records button:hover { background: var(--color-surface); } }
+@media (max-width: 767px) { .page { padding-block-start: 1.75rem; } .layout { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; } .records { max-height: 18rem; overflow-y: auto; } .pair, .linkRow { grid-template-columns: minmax(0, 1fr); } .login, .fieldset { padding: 1rem; } }
